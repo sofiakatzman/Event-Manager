@@ -30,9 +30,13 @@ class Positions(Base):
     tipout_percent = Column(Integer())
 
 
-# Current Tasks: (no logic yet)
-# step 1: set up classes -> tables 
-# step 2: set up class methods 
-# step 3: set up instance methods 
 
+
+# Current Tasks: (no logic yet)
+# step 1: set up classes -> tables -- find out about tips & schedule 
+# step 2: set up class methods ? since we are using queries do we need methods? 
+# step 3: set up instance methods ? since we are using queries do we need methods? 
+
+
+# come back to whether or not i need to create classes for tips and schedule (i think i do)
 
