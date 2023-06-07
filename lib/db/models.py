@@ -15,6 +15,18 @@ class Users(Base):
         self.first_name = first_name
         self.last_name = last_name
         self.position_id = position_id
+
+    def __repr__(self):
+        print(f''' 
+              Name: {self.first_name} {self.last_name}
+              Position: {self.position_id}
+              ''')    
+
+    @classmethod
+    def print_users(cls):
+        print(Users)
+
+    
         
 
 
@@ -47,6 +59,7 @@ class Positions(Base):
     def __init__(self, name):
         self.name = name
         self.tipout_percent = 0
+
 
 
 # Current Tasks: (no logic yet)
