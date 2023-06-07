@@ -22,11 +22,10 @@ class Users(Base):
               Position: {self.position_id}
               ''')    
 
-    @classmethod
-    def print_users(cls):
-        print(Users)
+    def add_user():
+        pass
 
-    
+
         
 
 
@@ -47,7 +46,15 @@ class Events(Base):
         tip_total = 0
         is_active = True
 
-
+    def __repr__(self):
+        # this might be replaced with a query? tbd ... 
+        print(f''' 
+              Event Type: {self.type}
+              Event Description: {self.description}
+              Event Date: {self.date}
+              Event is Active ? : {self.is_active}
+              Event Staff: TBD  
+              ''')    
 
 class Positions(Base):
     __tablename__ = 'positions'
@@ -60,12 +67,17 @@ class Positions(Base):
         self.name = name
         self.tipout_percent = 0
 
-
+    def __repr__(self):
+        # this might be replaced with a query? tbd ... 
+        print(f''' 
+              Position Name : {self.name}
+              Position Tipout Percentage : {self.tipout_percent}%
+              ''')  
 
 # Current Tasks: (no logic yet)
 # ✔ step 1: set up classes -> tables -- find out about tips & schedule 
 # ✔ step 1b: add seed data so I can test methods 
-# step 2: set up class methods ? since we are using queries do we need methods? 
+# ✔ step 2: set up class methods ? since we are using queries do we need methods? 
 # step 3: set up instance methods ? since we are using queries do we need methods? 
 
 
