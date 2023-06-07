@@ -14,8 +14,11 @@ Event Manager is a user friendly command line interface where Event Managers can
 run `pipenv install` to install all package dependencies
 run `pipenv shell` to enter virtual environment
 
+in the lib/db directory run `python seed.py` to seed database
+
 ## Usage Visuals
 TBD
+
 ## Contributing
 Pull requests are welcome for review. No major changes are allowed.
 Please reach out to support if you have any questions.
