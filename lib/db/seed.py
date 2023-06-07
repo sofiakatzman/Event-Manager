@@ -16,11 +16,13 @@ session.query(Positions).delete()
 session.query(Events).delete()
 
 positions_list = {
+    0 : "Standby",
     1 : "Waitress" , 
     2 : "Bartender",
     3 : "Busser",
     4 : "Hostess",
-    5 : "Administration" }
+    5 : "Administration"
+    }
 
 # generate users seeded data
 users = []
