@@ -32,12 +32,12 @@ class Events(Base):
     tip_total = Column(Integer())
     is_active = Column(String())
 
-    def __init__(self, type, description, date):
+    def __init__(self, type, description, date, tip_total = 0, is_active = "True"):
         self.type = type
         self.description = description
         self.date = date
-        tip_total = 0
-        is_active = True
+        self.tip_total = tip_total
+        self.is_active = is_active
 
     def __repr__(self):
         return f''' 
@@ -60,13 +60,15 @@ class Positions(Base):
     name = Column(String())
     tipout_percent = Column(Integer())
 
-    def __init__(self, name):
+    def __init__(self, id, name):
+        self.id = id
         self.name = name
         self.tipout_percent = 0
 
 
     def __repr__(self):
         return f''' 
+            Position ID : {self.id}
             Position Name : {self.name}
             Position Tipout Percentage : {self.tipout_percent}%
         '''
@@ -106,7 +108,7 @@ class Schedules(Base):
     position_id = Column(Integer(), ForeignKey("positions.id")) # this is a foreign key
     arrival_time = Column(Integer())
 
-    def __init__(self, event_id, event_type, user_id, position_id, arrival_time):
+    def __init__(self, event_id, event_type, user_id, position_id, arrival_time=0000):
         self.event_id = event_id  
         self.event_type = event_type
         self.user_id = user_id   
