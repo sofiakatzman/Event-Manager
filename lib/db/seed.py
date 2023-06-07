@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 import random
 
-from models import (Users, Events, Positions)
+from models import (Users, Events, Positions, Tips, Schedules)
 
 fake = Faker()
 
@@ -15,6 +15,8 @@ session = Session(engine, future=True)
 session.query(Users).delete()
 session.query(Positions).delete()
 session.query(Events).delete()
+session.query(Tips).delete()
+session.query(Schedules).delete()
 
 positions_list = {
     0 : "Standby",
@@ -66,9 +68,16 @@ for event_type, event_description in event_types.items():
     )
     events.append(event)
 
-#seed data
+# Generate schedule data
+
+# Generate tip data
+
+# Seed data
 print("Seeding data...")
+
+# Add all data to the session
 session.add_all(users)
 session.add_all(positions)
 session.add_all(events)
+
 session.commit()
