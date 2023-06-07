@@ -17,10 +17,10 @@ class Users(Base):
         self.position_id = position_id
 
     def __repr__(self):
-        print(f''' 
-              Name: {self.first_name} {self.last_name}
-              Position: {self.position_id}
-              ''')    
+        return f''' 
+            Name: {self.first_name} {self.last_name}
+            Position: {self.position_id}
+        '''  
 
     # def add_user():
     #     pass
@@ -50,14 +50,13 @@ class Events(Base):
         is_active = True
 
     def __repr__(self):
-        # this might be replaced with a query? tbd ... 
-        print(f''' 
-              Event Type: {self.type}
-              Event Description: {self.description}
-              Event Date: {self.date}
-              Event is Active ? : {self.is_active}
-              Event Staff: TBD  
-              ''')   
+        return f''' 
+            Event Type: {self.type}
+            Event Description: {self.description}
+            Event Date: {self.date}
+            Event is Active ? : {self.is_active}
+            Event Staff: TBD  
+        '''
          
     def close_out_event(self):
         pass
@@ -95,11 +94,10 @@ class Positions(Base):
         self.tipout_percent = 0
 
     def __repr__(self):
-        # this might be replaced with a query? tbd ... 
-        print(f''' 
-              Position Name : {self.name}
-              Position Tipout Percentage : {self.tipout_percent}%
-              ''')  
+        return f''' 
+            Position Name : {self.name}
+            Position Tipout Percentage : {self.tipout_percent}%
+        '''
 
     # def edit_tipout(self):
     #     pass
@@ -117,11 +115,73 @@ class Positions(Base):
 
 
 
+
+
+class Tips(Base):
+    __tablename__ = 'tips'
+
+    id = Column(Integer(), primary_key=True)
+    event_id = Column(Integer()) # this is a foreign key / proxy association 
+    user_id = Column(Integer()) # this is a foreign key / proxy association 
+    tipout_amount = Column(Integer())
+    check_number = Column(Integer()) 
+
+    def __init__(self, event_id, user_id, tipout_amount, check_number="NOT PAID"):
+        self.event_id = event_id  # this is a foreign key / proxy association 
+        self.user_id = user_id  # this is a foreign key / proxy association 
+        self.tipout_amount = tipout_amount
+        self.check_number = check_number
+
+    def __repr__(self):
+        return f''' 
+                Event ID : {self.event_id}
+                User ID : {self.user_id}
+                Tipout Amount : {self.tipout_amount}
+                Check Number : {self.check_number}
+            ''' 
+        
+
+class Schedules(Base):
+    __tablename__ = 'schedules'
+
+    id = Column(Integer(), primary_key=True)
+    event_id = Column(Integer()) # this is a foreign key / proxy association 
+    event_type = Column(String())
+    user_id = Column(Integer()) # this is a foreign key / proxy association 
+    position_id = Column(Integer()) # this is a foreign key / proxy association 
+    arrival_time = Column(Integer())
+
+    def __init__(self, event_id, event_type, user_id, position_id, arrival_time):
+        self.event_id = event_id  # this is a foreign key / proxy association 
+        self.event_type = event_type
+        self.user_id = user_id  # this is a foreign key / proxy association 
+        self.position_id = position_id
+        self.arrival_time = arrival_time
+
+    def __repr__(self):
+        return f''' 
+                Event ID : {self.event_id}
+                Event Type : {self.event_type}
+                User ID : {self.user_id}
+                Position : {self.position_id}
+                Arrival Time : {self.arrival_time}
+        '''
+        # return f'{self.event_id, self.event_type, self.user_id, self.position_id, self.arrival_time}'
+        
+              
+        
+        
+        
+        
 # Current Tasks: (no logic yet)
-# ✔ step 1: set up classes -> tables -- find out about tips & schedule 
-# ✔ step 1b: add seed data so I can test methods 
-# ✔ step 2: set up class methods ? since we are using queries do we need methods? 
-# ✔ step 3: set up instance methods ? since we are using queries do we need methods? 
+# ✔ 
+# ✔ add schemas for tips and schedule 
+# ✔ add print methods for each Class
+# work on many-to-many relationships / associations on my tips and schedule tables
+# seed tips, schedule, and events tables 
+
+
+
 
 
 # come back to whether or not i need to create classes for tips and schedule (i think i do)
