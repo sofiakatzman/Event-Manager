@@ -22,12 +22,15 @@ class Users(Base):
               Position: {self.position_id}
               ''')    
 
-    def add_user():
-        pass
+    # def add_user():
+    #     pass
 
+    # def edit_user():
+    #     pass
 
-        
-
+    # @classmethod
+    # def view_all(cls):
+    #     pass
 
 class Events(Base):
     __tablename__ = 'events'
@@ -54,7 +57,31 @@ class Events(Base):
               Event Date: {self.date}
               Event is Active ? : {self.is_active}
               Event Staff: TBD  
-              ''')    
+              ''')   
+         
+    def close_out_event(self):
+        pass
+
+    # def create_event_schedule(self):
+    #     pass
+
+    # def edit_staff_schedule(self):
+    #     pass
+
+    # def print_staff_schedule(self):
+    #     pass
+
+    # @classmethod
+    # def view_all(cls):
+    #     pass
+
+    # @classmethod
+    # def view_all_open(cls):
+    #     pass
+
+    # @classmethod
+    # def view_all_closed(cls):
+    #     pass
 
 class Positions(Base):
     __tablename__ = 'positions'
@@ -74,12 +101,27 @@ class Positions(Base):
               Position Tipout Percentage : {self.tipout_percent}%
               ''')  
 
+    # def edit_tipout(self):
+    #     pass
+
+    # def delete_position(self):
+    #     pass
+
+    # @classmethod
+    # def view_all(cls):
+    #     pass
+
+    # @classmethod
+    # def add_position(cls):
+    #     pass
+
+
+
 # Current Tasks: (no logic yet)
 # ✔ step 1: set up classes -> tables -- find out about tips & schedule 
 # ✔ step 1b: add seed data so I can test methods 
 # ✔ step 2: set up class methods ? since we are using queries do we need methods? 
-# step 3: set up instance methods ? since we are using queries do we need methods? 
+# ✔ step 3: set up instance methods ? since we are using queries do we need methods? 
 
 
 # come back to whether or not i need to create classes for tips and schedule (i think i do)
-
