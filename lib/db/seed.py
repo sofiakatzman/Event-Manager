@@ -1,6 +1,7 @@
 from faker import Faker
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+from datetime import date
 import random
 
 from models import (Users, Events, Positions)
@@ -47,8 +48,27 @@ for position_id, position_name in positions_list.items():
 # generate event data
 #=> NO EVENT DATA FOR NOW ** 
 
+event_types = {"Art Gallery Opening" : "Art Gallery Opening for P&W" ,
+                "Private Event" : "Private Event for Sir Elton John",
+                "Music Show" : "Music Event at The Edge",
+                "Talent Showcase" : "Talent Showcase at Sony Hall", 
+                "Music Festival" : "CircoLoco Music Festival"}
+events = []
+
+# self, type, description, date
+start_date = date(2022, 1, 1)
+end_date = date(2023, 6, 1)
+for event_type, event_description in event_types.items():
+    event = Events(
+        type = f'{event_type}',
+        description = f'{event_description}',
+        date = f'{fake.date_between_dates(date_start=start_date, date_end=end_date)}'
+    )
+    events.append(event)
+
 #seed data
 print("Seeding data...")
 session.add_all(users)
 session.add_all(positions)
+session.add_all(events)
 session.commit()
