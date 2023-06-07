@@ -7,7 +7,7 @@ from models import (Users, Events, Positions)
 
 fake = Faker()
 
-engine = create_engine("sqlite:///event_manager")
+engine = create_engine("sqlite:///event_manager.db")
 session = Session(engine, future=True)
 
 # clear data when session runs
@@ -30,7 +30,7 @@ for i in range(30):
     user = Users(
         first_name=f'{fake.first_name()}',
         last_name=f'{fake.last_name()}',
-        position_id=random.randint(1, 4)
+        position_id=random.randint(0, 5)
     )
     users.append(user)
 
@@ -40,8 +40,7 @@ positions = []
 for position_id, position_name in positions_list.items():
     position = Positions(
         id=position_id,
-        name=position_name,
-        tipout_percent=0
+        name=position_name
     )
     positions.append(position)
 
