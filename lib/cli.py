@@ -15,6 +15,24 @@ event_functions = importlib.import_module('event_functions')
 tip_functions = importlib.import_module('tip_functions')
 reporting_functions = importlib.import_module('reporting_functions')
 
+# rerouting after user requested action has been completed
+def reroute():
+    reroute_choice = 0
+    while reroute_choice !=1:  
+        print(f'''
+        Would you like to stay in this module?
+        1 - YES
+        2 - NO, take me back to the main menu
+        ''')
+
+        reroute_choice = int(input())
+
+        if reroute_choice == 1:
+            print("Rerouting back to Event Module...")
+
+        if reroute_choice == 2:
+            print("Rerouting back to Main Menu...")
+            main()
 
 def main():
     # enter main menu choice options
@@ -53,15 +71,19 @@ def main():
 
                 if user_choice == 1:
                     user_functions.view() 
+                    reroute()
 
                 if user_choice == 2:
                     user_functions.add()
+                    reroute()
 
                 if user_choice == 3:
                     user_functions.edit()
+                    reroute()
 
                 if user_choice == 4:
                     user_functions.delete()
+                    reroute()
 
         ## enter positions module (2)
         
@@ -82,15 +104,19 @@ def main():
 
                 if position_choice == 1:
                     position_functions.view()
+                    reroute()
                     
                 if position_choice == 2:
                     position_functions.add()
+                    reroute()
 
                 if position_choice == 3:
                     position_functions.edit()
+                    reroute()
 
                 if position_choice == 4:
                     position_functions.delete()
+                    reroute()
 
         ## enter events module (3)        
         
@@ -112,33 +138,23 @@ def main():
 
                 if events_choice == 1:
                     event_functions.add() 
+                    reroute()
                 
                 if events_choice == 2:
                     event_functions.create_schedule()
+                    reroute()
 
                 if events_choice == 3:
                     event_functions.edit_schedule()
+                    reroute()
 
                 if events_choice == 4:
                     event_functions.closeout()
+                    reroute()
 
                 if events_choice == 5:
                     event_functions.view() 
-                    reroute_choice = 0
-                    while reroute_choice !=1:  
-                        print(f'''
-                Would you like to stay in this module?
-                    1 - YES
-                    2 - NO, take me back to the main menu
-                        ''')
-                        reroute_choice = int(input())
-
-                        if reroute_choice == 1:
-                            print("Rerouting back to Event Module...")
-                
-                        if reroute_choice == 2:
-                            print("Rerouting back to Main Menu...")
-                            main()
+                    reroute()
                             
 
         ## enter staff tips module (4)
@@ -157,9 +173,11 @@ def main():
 
                 if staff_tips_choice == 1:
                     tip_functions.tipout()
+                    reroute()
                 
                 if staff_tips_choice == 2:
                     tip_functions.payout()
+                    reroute()
 
         ## enter reporting module (5)
         reports_choice = 0
@@ -180,18 +198,23 @@ def main():
 
                 if reports_choice == 1:
                     reporting_functions.tips_by_event()
+                    reroute()
                 
                 if reports_choice == 2:
                     reporting_functions.wage_ytd()
+                    reroute()
 
                 if reports_choice == 3:
                     reporting_functions.payroll_cost()
+                    reroute()
 
                 if reports_choice == 4:
                     reporting_functions.view_open_events()
+                    reroute()
 
                 if reports_choice == 5:
                     reporting_functions.staff_by_position()
+                    reroute()
 
 
 if __name__ == "__main__":
