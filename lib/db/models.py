@@ -18,6 +18,7 @@ class Users(Base):
 
     def __repr__(self):
         return f''' 
+            ID: {self.id}
             Name: {self.first_name} {self.last_name}
             Position: {self.position_id}
         '''  
