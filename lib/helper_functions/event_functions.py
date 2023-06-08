@@ -8,7 +8,7 @@ def test():
     print("Testing passed for Event Module!")
 
 # create an event
-def add():
+def add_event():
     print("Creating an Event...")
 
 # create a staff schedule 
