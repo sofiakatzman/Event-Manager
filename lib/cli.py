@@ -11,6 +11,7 @@ reporting_functions = importlib.import_module('user_functions')
 
 
 def main():
+    # enter main menu choice options
     choice = 0
     while choice != 6:
         print("***EVENT MANAGER***")
@@ -25,13 +26,10 @@ def main():
                     6 - EXIT
         ''')
 
-        choice = int(input())  # Move the input statement inside the loop
-        user_choice = 0  # Move the initialization outside the outer loop
-        position_choice = 0
-        events_choice = 0
-        staff_tips_choice = 0
-        reports_choice = 0
-    ## enter users module (1)
+        choice = int(input()) 
+
+        # enter users module (1)
+        user_choice = 0  
         if choice == 1:
             while user_choice != 5:
                 print("Entering Users' Module...")
@@ -58,8 +56,8 @@ def main():
                 if user_choice == 4:
                     pass
 
-
-    ## enter positions module (2)
+        ## enter positions module (2)
+        position_choice = 0
         if choice == 2:
             while position_choice != 5:
                 print("Entering Positions' Module...")
@@ -86,9 +84,9 @@ def main():
 
                 if position_choice == 4:
                     pass
-        
 
-    ## enter events module (3)
+        ## enter events module (3)        
+        events_choice = 0
         if choice == 3:
             while events_choice != 5:
                 print("Entering Events' Module...")
@@ -115,8 +113,8 @@ def main():
                 if events_choice == 4:
                     pass
 
-
-    ## enter staff tips module (4)
+        ## enter staff tips module (4)
+        staff_tips_choice = 0
         if choice == 4:
             while staff_tips_choice != 3:
                 print("Entering Staff Tips' Module...")
@@ -135,8 +133,8 @@ def main():
                 if staff_tips_choice == 2:
                     pass
 
-
-    ## enter reporting module (5)
+        ## enter reporting module (5)
+        reports_choice = 0
         if choice == 5:
             while reports_choice != 6:
                 print("Entering Reporting Module...")
