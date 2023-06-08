@@ -7,7 +7,7 @@ user_functions = importlib.import_module('user_functions')
 position_functions = importlib.import_module('position_functions')
 event_functions = importlib.import_module('event_functions')
 tip_functions = importlib.import_module('tip_functions')
-reporting_functions = importlib.import_module('user_functions')
+reporting_functions = importlib.import_module('reporting_functions')
 
 
 def main():
@@ -45,16 +45,16 @@ def main():
                 user_choice = int(input())
 
                 if user_choice == 1:
-                    user_functions.test()
+                    user_functions.view()
                 
                 if user_choice == 2:
-                    pass
+                    user_functions.add()
 
                 if user_choice == 3:
-                    pass
+                    user_functions.edit()
 
                 if user_choice == 4:
-                    pass
+                    user_functions.delete()
 
         ## enter positions module (2)
         position_choice = 0
@@ -73,17 +73,17 @@ def main():
                 position_choice = int(input())
 
                 if position_choice == 1:
-                    position_functions.test()
+                    position_functions.view()
                     
                 
                 if position_choice == 2:
-                    pass
+                    position_functions.add()
 
                 if position_choice == 3:
-                    pass
+                    position_functions.edit()
 
                 if position_choice == 4:
-                    pass
+                    position_functions.delete()
 
         ## enter events module (3)        
         events_choice = 0
@@ -102,16 +102,16 @@ def main():
                 events_choice = int(input())
 
                 if events_choice == 1:
-                    event_functions.test()
+                    event_functions.add()
                 
                 if events_choice == 2:
-                    pass
+                    event_functions.create_schedule()
 
                 if events_choice == 3:
-                    pass
+                    event_functions.edit_schedule()
 
                 if events_choice == 4:
-                    pass
+                    event_functions.closeout()
 
         ## enter staff tips module (4)
         staff_tips_choice = 0
@@ -128,10 +128,10 @@ def main():
                 staff_tips_choice = int(input())
 
                 if staff_tips_choice == 1:
-                    tip_functions.test()
+                    tip_functions.tipout()
                 
                 if staff_tips_choice == 2:
-                    pass
+                    tip_functions.payout()
 
         ## enter reporting module (5)
         reports_choice = 0
@@ -151,20 +151,50 @@ def main():
                 reports_choice = int(input())
 
                 if reports_choice == 1:
-                    reporting_functions.test()
+                    reporting_functions.tips_by_event()
                 
                 if reports_choice == 2:
-                    pass
+                    reporting_functions.wage_ytd()
 
                 if reports_choice == 3:
-                    pass
+                    reporting_functions.payroll_cost()
 
                 if reports_choice == 4:
-                    pass
+                    reporting_functions.view_open_events()
 
-                if reports_choice == 4:
-                    pass
+                if reports_choice == 5:
+                    reporting_functions.staff_by_position()
 
 
 if __name__ == "__main__":
     main()
+
+# Helper Functions By Module Key: location = /lib/helper_functions
+# User Module (Main menu choice = 1): user_functions.py
+# 1 - VIEW USERS - view()
+# 2 - ADD A USER - add()
+# 3 - EDIT A USER - edit()
+# 4 - DELETE A USER - delete()
+
+# Position Module (Main menu choice = 2): position_functions.py
+# 1 - VIEW POSITIONS - view()
+# 2 - ADD A POSITION - add()
+# 3 - EDIT POSITION TIP OUT PERCENTAGE - edit()
+# 4 - DELETE A POSITION - delete()
+
+# Event Module (Main menu choice = 3): event_functions.py 
+# 1 - CREATE AN EVENT - add()
+# 2 - CREATE AN EVENT STAFF SCHEDULE - create_schedule()
+# 3 - EDIT AN EVENT STAFF SCHEDULE - edit_schedule()
+# 4 - CLOSE OUT AN EVENT - closeout()
+
+# Tips Module (Main menu choice = 4): tip_functions.py
+# 1 - CALCULATE STAFF TIP PAYOUT BY EVENT - tipout()
+# 2 - PAY OUT STAFF - payout()
+
+# Reporting Module (Main menu choice = 5): reporting_functions.py
+# 1 - VIEW TIP TOTALS BY EVENT - tips_by_event()
+# 2 - CALCULATE USER WAGE YTD - wage_ytd()
+# 3 - CALCULATE PAYROLL COST - payroll_cost()
+# 4 - VIEW OPEN EVENTS - view_open_events()
+# 5 - VIEW STAFF BY POSITIONS - staff_by_position()
