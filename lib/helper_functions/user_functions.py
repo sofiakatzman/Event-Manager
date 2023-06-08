@@ -1,8 +1,9 @@
-# User:
-#     1 - VIEW USERS - print()
+# User: 
+# add user input validation to all of theese: 
+#     1 - VIEW USERS - print() 
 #     2 - ADD A USER - add()
 #     3 - EDIT A USER - edit()
-#     4 - DELETE A USER - delete()
+#     4 - DELETE A USER - delete() 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from db.models import (Users, Positions)
@@ -20,7 +21,6 @@ def view():
     print(session.query(Users).all())
 
 # add a user
-# need to ask for first name, last name, and position
 def add():
     print("Let's add new staff!")
     print("What is your staff member's first name?")
@@ -56,7 +56,8 @@ def edit():
               ''')
         edit_choice = int(input())
         while edit_choice !=4:
-            # edit user first name
+
+            #=> edit user first name
             if edit_choice == 1:
                 print("You've selected: Edit User First Name")
                 print(f"What would you like '{user_data.first_name}' to be changed to?")
@@ -79,8 +80,7 @@ def edit():
                         print("Oh no! Let's try that again...")
                         edit()
 
-                
-            # edit user last name
+            #=> edit user last name
             if edit_choice == 2:
                 print("You've selected: Edit User Last Name")
                 print(f'What would you like "{user_data.last_name}" to be changed to?')
@@ -101,8 +101,8 @@ def edit():
                     if check == 2:
                         print("Oh no! Let's try that again...")
                         edit()
-                pass
-            # edit user position
+            
+            #=> edit user position
             if edit_choice == 3:
                 print("You've selected: Edit User Position")
                 print(f'What would you like "{user_data.position_id}" to be changed to?')
@@ -126,8 +126,7 @@ def edit():
                         print("Oh no! Let's try that again...")
                         edit()
 
-
-# delete a user
+# delete a user 
 def delete():
     print("You've selected : Delete User!")
     print("This is your current user data:")
@@ -145,11 +144,10 @@ def delete():
                     1 - YES
                     2 - NO
                 ''')
-        # would like to add a query and check that blocks this activity if staff is scheduled to work an open event 
+        #=> would like to add a query and check that blocks this activity if staff is scheduled to work an open event 
         delete_choice = int(input())
         while delete_choice !=2:
                 if delete_choice == 1:
-                    ## delete 
                     session.delete(user_data)
                     print(f"{user_data.first_name} {user_data.last_name} has been permanently deleted.")
                     session.commit()
