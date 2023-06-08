@@ -1,3 +1,13 @@
+import sys
+import importlib
+
+sys.path.append('./helper_functions')
+
+user_functions = importlib.import_module('user_functions')
+
+from helpers import functions
+user_functions.test()
+
 def main():
     choice = 0
     while choice != 6:
@@ -5,7 +15,7 @@ def main():
         print("Hello...")
         print('''
                 What module would you like to enter? 
-                    1 - USERS
+                    1 - USERS 
                     2 - POSITIONS
                     3 - EVENTS
                     4 - STAFF TIPS
@@ -63,7 +73,8 @@ def main():
                 position_choice = int(input())
 
                 if position_choice == 1:
-                    pass
+                    functions()
+                    
                 
                 if position_choice == 2:
                     pass
