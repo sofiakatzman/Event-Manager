@@ -1,2 +1,2 @@
 def test():
-    print("Hey Sof, we are recording! LIVE! 3, 2, 1....")
+    print("Testing passed for User Module!")

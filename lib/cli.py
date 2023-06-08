@@ -4,9 +4,11 @@ import importlib
 sys.path.append('./helper_functions')
 
 user_functions = importlib.import_module('user_functions')
+position_functions = importlib.import_module('position_functions')
+event_functions = importlib.import_module('event_functions')
+tip_functions = importlib.import_module('tip_functions')
+reporting_functions = importlib.import_module('user_functions')
 
-from helpers import functions
-user_functions.test()
 
 def main():
     choice = 0
@@ -45,7 +47,7 @@ def main():
                 user_choice = int(input())
 
                 if user_choice == 1:
-                    pass
+                    user_functions.test()
                 
                 if user_choice == 2:
                     pass
@@ -73,7 +75,7 @@ def main():
                 position_choice = int(input())
 
                 if position_choice == 1:
-                    functions()
+                    position_functions.test()
                     
                 
                 if position_choice == 2:
@@ -102,7 +104,7 @@ def main():
                 events_choice = int(input())
 
                 if events_choice == 1:
-                    pass
+                    event_functions.test()
                 
                 if events_choice == 2:
                     pass
@@ -128,7 +130,7 @@ def main():
                 staff_tips_choice = int(input())
 
                 if staff_tips_choice == 1:
-                    pass
+                    tip_functions.test()
                 
                 if staff_tips_choice == 2:
                     pass
@@ -151,7 +153,7 @@ def main():
                 reports_choice = int(input())
 
                 if reports_choice == 1:
-                    pass
+                    reporting_functions.test()
                 
                 if reports_choice == 2:
                     pass
