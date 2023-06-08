@@ -1,5 +1,11 @@
 import sys
 import importlib
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from db.models import (Events)
+
+engine = create_engine("sqlite:///db/event_manager.db")
+session = Session(engine, future=True)
 
 sys.path.append('./helper_functions')
 
@@ -29,8 +35,9 @@ def main():
         choice = int(input()) 
 
         # enter users module (1)
-        user_choice = 0  
+        
         if choice == 1:
+            user_choice = 0  
             while user_choice != 5:
                 print("Entering Users' Module...")
                 print('''
@@ -45,8 +52,8 @@ def main():
                 user_choice = int(input())
 
                 if user_choice == 1:
-                    user_functions.view()
-                
+                    user_functions.view() 
+
                 if user_choice == 2:
                     user_functions.add()
 
@@ -57,8 +64,9 @@ def main():
                     user_functions.delete()
 
         ## enter positions module (2)
-        position_choice = 0
+        
         if choice == 2:
+            position_choice = 0
             while position_choice != 5:
                 print("Entering Positions' Module...")
                 print('''
@@ -75,7 +83,6 @@ def main():
                 if position_choice == 1:
                     position_functions.view()
                     
-                
                 if position_choice == 2:
                     position_functions.add()
 
@@ -86,9 +93,10 @@ def main():
                     position_functions.delete()
 
         ## enter events module (3)        
-        events_choice = 0
+        
         if choice == 3:
-            while events_choice != 5:
+            events_choice = 0
+            while events_choice != 6:
                 print("Entering Events' Module...")
                 print('''
                 What would you like to do?
@@ -96,13 +104,14 @@ def main():
                     2 - CREATE AN EVENT STAFF SCHEDULE
                     3 - EDIT AN EVENT STAFF SCHEDULE
                     4 - CLOSE OUT AN EVENT
-                    5 - GO BACK TO MAIN MENU
+                    5 - VIEW EVENT HISTORY
+                    6 - GO BACK TO MAIN MENU
                 ''')
 
                 events_choice = int(input())
 
                 if events_choice == 1:
-                    event_functions.add()
+                    event_functions.add() 
                 
                 if events_choice == 2:
                     event_functions.create_schedule()
@@ -113,9 +122,28 @@ def main():
                 if events_choice == 4:
                     event_functions.closeout()
 
+                if events_choice == 5:
+                    event_functions.view() 
+                    reroute_choice = 0
+                    while reroute_choice !=1:  
+                        print(f'''
+                Would you like to stay in this module?
+                    1 - YES
+                    2 - NO, take me back to the main menu
+                        ''')
+                        reroute_choice = int(input())
+
+                        if reroute_choice == 1:
+                            print("Rerouting back to Event Module...")
+                
+                        if reroute_choice == 2:
+                            print("Rerouting back to Main Menu...")
+                            main()
+                            
+
         ## enter staff tips module (4)
-        staff_tips_choice = 0
         if choice == 4:
+            staff_tips_choice = 0
             while staff_tips_choice != 3:
                 print("Entering Staff Tips' Module...")
                 print('''
@@ -187,6 +215,7 @@ if __name__ == "__main__":
 # 2 - CREATE AN EVENT STAFF SCHEDULE - create_schedule()
 # 3 - EDIT AN EVENT STAFF SCHEDULE - edit_schedule()
 # 4 - CLOSE OUT AN EVENT - closeout()
+# 5 - VIEW EVENT HISTORY - view()
 
 # Tips Module (Main menu choice = 4): tip_functions.py
 # 1 - CALCULATE STAFF TIP PAYOUT BY EVENT - tipout()

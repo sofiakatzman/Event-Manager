@@ -9,7 +9,7 @@ def test():
 
 # view users 
 def view():
-    print("Printing all users...")
+    print("These are all of your users...")
 
 # add a user
 def add():

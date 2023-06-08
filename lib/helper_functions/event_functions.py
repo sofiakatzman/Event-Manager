@@ -4,8 +4,15 @@
 #     3 - EDIT AN EVENT STAFF SCHEDULE - edit_schedule()
 #     4 - CLOSE OUT AN EVENT - closeout()
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+from db.models import (Events)
+
+engine = create_engine("sqlite:///db/event_manager.db")
+session = Session(engine, future=True)
+
 def test():
-    print("Testing passed for Event Module!")
+    print('Entering Event Module...')
 
 # create an event
 def add_event():
@@ -24,3 +31,6 @@ def closeout():
     print("Closing out an event...")
 
 
+def view():
+    print("Printing Event History...")    
+    print(session.query(Events).all())
