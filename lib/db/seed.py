@@ -69,6 +69,7 @@ for event_type, event_description in event_types.items():
 # def __init__(self, event_id, event_type, user_id, position_id, arrival_time=0000):
 schedules = []
 schedule1 = Schedules(1,"Art Gallery Opening", 1, 5, "12:00")
+schedule2 = Schedules(1,"Art Gallery Opening", 1, 5, "12:00")
 schedules.append(schedule1)
 
 # Generate tip data
