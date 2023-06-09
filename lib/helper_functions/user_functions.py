@@ -7,7 +7,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from db.models import (Users, Positions)
-from cli import main
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
@@ -73,12 +72,13 @@ def edit():
                     if check == 1:
                         user_data.first_name = new_first_name
                         session.commit()
-                        print("Change made! Navigating back to main menu....")
-                        main()
+                        print("Change made!")
+                        check = 3            
 
                     if check == 2:
                         print("Oh no! Let's try that again...")
                         edit()
+                edit_choice = 4
 
             #=> edit user last name
             if edit_choice == 2:
@@ -96,11 +96,13 @@ def edit():
                     if check == 1:
                         user_data.last_name = new_last_name
                         print("Change made!")
-                        main()
-                        
+                        check = 3
+            
+
                     if check == 2:
                         print("Oh no! Let's try that again...")
                         edit()
+                edit_choice = 4
             
             #=> edit user position
             if edit_choice == 3:
@@ -120,11 +122,12 @@ def edit():
                         user_data.position_id = new_position
                         print("Change made!")
                         session.commit()
-                        main()
+                        check = 3
                         
                     if check == 2:
                         print("Oh no! Let's try that again...")
                         edit()
+                edit_choice = 4
 
 # delete a user 
 def delete():
@@ -146,14 +149,18 @@ def delete():
                 ''')
         #=> would like to add a query and check that blocks this activity if staff is scheduled to work an open event 
         delete_choice = int(input())
-        while delete_choice !=2:
-                if delete_choice == 1:
-                    session.delete(user_data)
-                    print(f"{user_data.first_name} {user_data.last_name} has been permanently deleted.")
-                    session.commit()
-                    main()
-                    
-                if delete_choice == 2:
-                    print("Oh no! Let's try that again...")
-                    delete()
+        while delete_choice !=3:
+            if delete_choice == 1:
+                session.delete(user_data)
+                print(f"{user_data.first_name} {user_data.last_name} has been permanently deleted.")
+                session.commit()
+                delete_choice = 3
+                
+                
+            if delete_choice == 2:
+                print("Oh no! Let's try that again...")
+                delete()
+    
+        delete_choice = 3
             
+        
