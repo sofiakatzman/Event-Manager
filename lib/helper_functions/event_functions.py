@@ -116,16 +116,6 @@ def edit_schedule():
     #=> THIS USER PATH NEEDS TO BE CREATED ###
 
 
-
-
-
-
-
-
-
-
-
-
 # close out an event
 def closeout():
     print("Let's closeout an event!")
@@ -140,43 +130,45 @@ def closeout():
     event = session.query(Events).filter(Events.id == find_id).first()
     print("This is the event you've selected.")
 
-    # print schedule for selected event 
-    event_schedule = session.query(Schedules).filter(Schedules.event_id == find_id).all()
-    print(event_schedule)
-    print("Is this the final event schedule?") 
-    # add yes / no path 
+# removing concept of tipout closing, kiss - 
+# print schedule for selected event 
+#     event_schedule = session.query(Schedules).filter(Schedules.event_id == find_id).all()
+#     print(event_schedule)
+#     print("Is this the final event schedule?") 
+#     # add yes / no path 
 
-# enter final event tip
-    print("Please enter the total tipout amount:")
-    event_tip = int(input())
+# # enter final event tip
+#     print("Please enter the total tipout amount:")
+#     event_tip = int(input())
 
 # add logic that counts the amount of each type of staff 
     
-    for scheduled in event_schedule:
-        event_id = find_id
-        user_id = scheduled.user_id    
+    # for scheduled in event_schedule:
+    #     event_id = find_id
+    #     user_id = scheduled.user_id    
 
-        # find position of current scheduled employee
-        position = session.query(Positions).filter(Positions.id == scheduled.position_id).first()    
+    #     # find position of current scheduled employee
+    #     position = session.query(Positions).filter(Positions.id == scheduled.position_id).first()    
 
-        # hold the position's tipout percent in variable tip_out_percent
-        tip_out_percent = position.tipout_percent
+    #     # hold the position's tipout percent in variable tip_out_percent
+    #     tip_out_percent = position.tipout_percent
 
-        # query amongst how many the tip will be distributed by based on that position
-        tip_out_split = session.query(Schedules).filter(Schedules.event_id == find_id, Schedules.position_id == position.id).count()
+    #     # query amongst how many the tip will be distributed by based on that position
+    #     tip_out_split = session.query(Schedules).filter(Schedules.event_id == find_id, Schedules.position_id == position.id).count()
         
-        # calculate tipout amount for scheduled employee: 
-        # tipout is based on total tip multiplied by the tipout percentage and then divided in the amount of employees who worked that position
-        tip_out_amount = (event_tip * tip_out_percent) / tip_out_split 
+    #     # calculate tipout amount for scheduled employee: 
+    #     # tipout is based on total tip multiplied by the tipout percentage and then divided in the amount of employees who worked that position
+    #     tip_out_amount = (event_tip * tip_out_percent) / tip_out_split 
 
-        tipout_amount = tip_out_amount
+    #     tipout_amount = tip_out_amount
 
-        # create new tips entry : 
-        tip = Tips(event_id=event_id, user_id=user_id, tipout_amount=tipout_amount )
-        session.commit()
+    #     # create new tips entry : 
+    #     Tips(event_id=event_id, user_id=user_id, tipout_amount=tipout_amount )
+    #     session.commit()
 
+    print("Your changes have been made!")
     # make event inactive
-    event.is_active = False
+    event[0].is_active = False
     session.commit()
 
   
