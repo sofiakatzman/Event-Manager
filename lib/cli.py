@@ -22,13 +22,13 @@ def reroute():
         print(f'''
         Would you like to stay in this module?
         1 - YES
-        2 - NO, take me back to the main menu
+        2 - NO - MAIN MENU 
         ''')
 
         reroute_choice = int(input())
 
         if reroute_choice == 1:
-            print("Rerouting back to Event Module...")
+            print("Rerouting back to Previous Module Homescreen...")
 
         if reroute_choice == 2:
             print("Rerouting back to Main Menu...")
