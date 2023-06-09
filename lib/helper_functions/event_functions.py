@@ -6,7 +6,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import (Events, Schedules, Positions, Tips)
+from db.models import (Events, Schedules, Positions, Tips, Users)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
@@ -29,8 +29,78 @@ def add_event():
 
 # create a staff schedule 
 def create_schedule():
-    print("Creating a Schedule...")
-    pass
+    print("Let's create a schedule...")
+    # print all events 
+    print("What event would you like to create a schedule for?")
+    all_active_events = session.query(Events).filter(Events.is_active == True).all()
+    print(all_active_events)
+    event_selection = int(input())
+
+    print("This is the event you've selected:")
+    selected_event = session.query(Events).filter(Events.id == event_selection).first()
+    print(selected_event)
+
+    # new_schedule = Schedules()
+
+    # iterate through the positions table positions to capture how many of each type of staff you want to hire 
+    positions = session.query(Positions).all()
+    staff_counts = {}
+    for position in positions:
+        print(f"How many {position.name} staff do you want to add?")
+        count = int(input())
+        staff_counts[position.id] = count
+
+        # ask user to pick staff based on position -- DICTIONARY! 
+    selected_staff = {}
+    for position_id, count in staff_counts.items():
+        staff_time = None
+        if count > 0:
+            staff_time = input(f"Enter the time for {next((p.name for p in positions if p.id == position_id), '')}: ")
+            print(f"Select {count} staff for {next((p.name for p in positions if p.id == position_id), '')}:")
+            available_staff = session.query(Users).filter(Users.position_id == position_id).all()
+            selected_staff[position_id] = []
+            if available_staff:
+                for staff in available_staff:
+                    print(f"{staff.id}. {staff.first_name} {staff.last_name}")
+                for _ in range(count):
+                    while True:
+                        staff_selection = input("Enter the ID of the staff member: ")
+                        if staff_selection.isdigit():
+                            staff_selection = int(staff_selection)
+                            if staff_selection not in [staff.id for staff_list in selected_staff.values() for staff in staff_list if staff is not None]:
+                                if staff_selection in [staff.id for staff in available_staff]:
+                                    break
+                                else:
+                                    print("Invalid staff ID. Please try again.")
+                            else:
+                                print("Staff member has already been selected. Please choose a different ID.")
+                        else:
+                            print("Invalid input. Please enter a valid staff ID.")
+                    selected_staff[position_id].append(next((staff for staff in available_staff if staff.id == staff_selection), None))
+            else:
+                print("No staff available for this position.")
+                selected_staff[position_id] = []
+        else:
+            selected_staff[position_id] = []
+
+    # create a Schedule entry per staff that uses the event name, position id, user id, time of arrival, etc.
+    for position_id, staff_list in selected_staff.items():
+        if staff_list:
+            for staff in staff_list:
+                if staff is not None:
+                    print(f"Enter the arrival time for {staff.first_name} {staff.last_name}:")
+                    arrival_time = int(staff_time)
+                    new_schedule = Schedules(
+                        event_id=selected_event.id,
+                        event_type=selected_event.type,
+                        user_id=staff.id,
+                        position_id=position_id,
+                        arrival_time=arrival_time
+                    )
+                    session.add(new_schedule)
+    session.commit()
+    print("Schedule created successfully!")
+
 
 # edit an event schedule
 def edit_schedule():
@@ -45,12 +115,23 @@ def edit_schedule():
     ''')
     #=> THIS USER PATH NEEDS TO BE CREATED ###
 
+
+
+
+
+
+
+
+
+
+
+
 # close out an event
 def closeout():
     print("Let's closeout an event!")
     
     # print all active events
-    active = session.query(Events).filter(Events.is_active == "True").all()
+    active = session.query(Events).filter(Events.is_active == True).all()
     print(active)
     print("Please enter the ID of the event you would like to closeout")
     
@@ -58,7 +139,7 @@ def closeout():
     find_id = int(input())
     event = session.query(Events).filter(Events.id == find_id).first()
     print("This is the event you've selected.")
-    
+
     # print schedule for selected event 
     event_schedule = session.query(Schedules).filter(Schedules.event_id == find_id).all()
     print(event_schedule)
@@ -70,7 +151,7 @@ def closeout():
     event_tip = int(input())
 
 # add logic that counts the amount of each type of staff 
-    tips = []
+    
     for scheduled in event_schedule:
         event_id = find_id
         user_id = scheduled.user_id    
@@ -92,11 +173,10 @@ def closeout():
 
         # create new tips entry : 
         tip = Tips(event_id=event_id, user_id=user_id, tipout_amount=tipout_amount )
-        tips.add(tip)
+        session.commit()
 
     # make event inactive
     event.is_active = False
-    session.add(tips)
     session.commit()
 
   
