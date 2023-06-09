@@ -137,7 +137,7 @@ def main():
                 events_choice = int(input())
 
                 if events_choice == 1:
-                    event_functions.add() 
+                    event_functions.add_event() 
                     reroute()
                 
                 if events_choice == 2:
