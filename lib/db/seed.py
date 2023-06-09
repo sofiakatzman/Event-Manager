@@ -20,7 +20,7 @@ session.query(Schedules).delete()
 
 # generate users seeded data
 users = []
-for i in range(30):
+for i in range(75):
     user = Users(
         first_name=f'{fake.first_name()}',
         last_name=f'{fake.last_name()}',
