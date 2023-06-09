@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -31,7 +31,7 @@ class Events(Base):
     date = Column(Integer())
     description = Column(String())
     tip_total = Column(Integer())
-    is_active = Column(String())
+    is_active = Column(Boolean())
 
     def __init__(self, type, description, date, tip_total = 0, is_active = "True"):
         self.type = type
@@ -42,6 +42,7 @@ class Events(Base):
 
     def __repr__(self):
         return f''' 
+            Event ID : {self.id}
             Event Type: {self.type}
             Event Description: {self.description}
             Event Date: {self.date}
@@ -61,7 +62,7 @@ class Positions(Base):
     name = Column(String())
     tipout_percent = Column(Integer())
 
-    def __init__(self, id, name):
+    def __init__(self, name, id):
         self.id = id
         self.name = name
         self.tipout_percent = 0
@@ -84,10 +85,10 @@ class Tips(Base):
     tipout_amount = Column(Integer())
     check_number = Column(Integer()) 
 
-    def __init__(self, event_id, user_id):
+    def __init__(self, event_id, user_id, tipout_amount):
         self.event_id = event_id  
         self.user_id = user_id  
-        self.tipout_amount = 0
+        self.tipout_amount = tipout_amount
         self.check_number = "NOT PAID"
 
     def __repr__(self):
@@ -125,73 +126,5 @@ class Schedules(Base):
                 Arrival Time : {self.arrival_time}
         '''
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Current Tasks: (no logic yet)
-# ✔ 
-# ✔ add schemas for tips and schedule 
-# ✔ add repr methods for each Class
-# work on many-to-many relationships / associations on my tips and schedule tables
-# seed tips, schedule, and events tables
-# --> at this point I can begin building out the CLI component with my data 
-#  
-
-# Removed Code: 
-# Users
-    # def add_user():
-    #     pass
-
-    # def edit_user():
-    #     pass
-
-    # @classmethod
-    # def view_all(cls):
-    #     pass
-# Events
-    # def create_event_schedule(self):
-    #     pass
-
-    # def edit_staff_schedule(self):
-    #     pass
-
-    # def print_staff_schedule(self):
-    #     pass
-
-    # @classmethod
-    # def view_all(cls):
-    #     pass
-
-    # @classmethod
-    # def view_all_open(cls):
-    #     pass
-
-    # @classmethod
-    # def view_all_closed(cls):
-    #     pass
-# Positions
-    # def edit_tipout(self):
-    #     pass
-
-    # def delete_position(self):
-    #     pass
-
-    # @classmethod
-    # def view_all(cls):
-    #     pass
-
-    # @classmethod
-    # def add_position(cls):
-    #     pass
 
 
