@@ -1,7 +1,7 @@
 # Reporting:
-#     1 - VIEW TIP TOTALS BY EVENT - tips_by_event()
-#     2 - CALCULATE USER WAGE YTD - wage_ytd()
-#     3 - CALCULATE PAYROLL COST - payroll_cost()
+#     1 - VIEW TIP TOTALS BY EVENT - tips_by_event() - REMOVE
+#     2 - CALCULATE USER WAGE YTD - wage_ytd() - REMOVE 
+#     3 - CALCULATE PAYROLL COST - payroll_cost() - REMOVE 
 #     4 - VIEW OPEN EVENTS - view_open_events()
 #     5 - VIEW STAFF BY POSITIONS - staff_by_position()
 
@@ -35,7 +35,8 @@ def tips_by_event():
         print("Event not found.")
 
 # calculate user wage YTD
-# def wage_ytd():
+def wage_ytd():
+    pass
 #     print("Calculating user wage YTD...")
 #     print("Enter the ID of the user:")
 #     user_id = int(input())
