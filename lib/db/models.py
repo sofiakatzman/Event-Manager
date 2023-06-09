@@ -33,7 +33,7 @@ class Events(Base):
     tip_total = Column(Integer())
     is_active = Column(Boolean())
 
-    def __init__(self, type, description, date, tip_total = 0, is_active = "True"):
+    def __init__(self, type, description, date, tip_total = 0, is_active = True):
         self.type = type
         self.description = description
         self.date = date
