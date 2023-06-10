@@ -1,9 +1,3 @@
-# Event:
-#     1 - CREATE AN EVENT - add_event()
-#     2 - CREATE AN EVENT STAFF SCHEDULE - create_schedule()
-#     3 - EDIT AN EVENT STAFF SCHEDULE - edit_schedule()
-#     4 - CLOSE OUT AN EVENT - closeout()
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from db.models import (Event, Schedule, Position, Staff)
@@ -16,12 +10,12 @@ def test():
 
 # create an event
 def add_event():
-    print("Creating an Event...")
+    print("Let's crate an event...")
     print("Please enter an Event Type:")
     new_name = str(input())
     print("Please enter an Event Description:")
     new_description = str(input())
-    print("Please enter Event Date: 00")
+    print("Please enter Event Date - Follow Date Format : YEAR-MM-DD :")
     new_date = str(input())
     new_event = Event(type = new_name , description = new_description , date = new_date )
     session.add(new_event)
@@ -31,14 +25,15 @@ def add_event():
 def create_schedule():
     print("Let's create a schedule...")
     # print all events 
-    print("What event would you like to create a schedule for?")
+    print("Please enter the ID of the event you would like to create a schedule for:")
     all_active_events = session.query(Event).filter(Event.is_active == True).all()
     print(all_active_events)
     event_selection = int(input())
 
-    print("This is the event you've selected:")
+    print("You've Selected:")
     selected_event = session.query(Event).filter(Event.id == event_selection).first()
     print(selected_event)
+    print("Initiating create schedule...")
 
     # new_schedule = Schedules()
 
@@ -46,7 +41,7 @@ def create_schedule():
     positions = session.query(Position).all()
     staff_counts = {}
     for position in positions:
-        print(f"How many {position.name} staff do you want to add?")
+        print(f"How many {position.name} will you need for the event?")
         count = int(input())
         staff_counts[position.id] = count
 
@@ -55,8 +50,8 @@ def create_schedule():
     for position_id, count in staff_counts.items():
         staff_time = None
         if count > 0:
-            staff_time = input(f"Enter the time for {next((p.name for p in positions if p.id == position_id), '')}: ")
-            print(f"Select {count} staff for {next((p.name for p in positions if p.id == position_id), '')}:")
+            staff_time = input(f"What time should{next((p.name for p in positions if p.id == position_id), '')}s arrive? : ")
+            print(f"Please pick {count}{next((p.name for p in positions if p.id == position_id), '')} to work the event :")
             available_staff = session.query(Staff).filter(Staff.position_id == position_id).all()
             selected_staff[position_id] = []
             if available_staff:
@@ -64,7 +59,7 @@ def create_schedule():
                     print(f"{staff.id}. {staff.first_name} {staff.last_name}")
                 for _ in range(count):
                     while True:
-                        staff_selection = input("Enter the ID of the staff member: ")
+                        staff_selection = input("Enter the ID of the staff member youd like to book: ")
                         if staff_selection.isdigit():
                             staff_selection = int(staff_selection)
                             if staff_selection not in [staff.id for staff_list in selected_staff.values() for staff in staff_list if staff is not None]:
@@ -78,7 +73,7 @@ def create_schedule():
                             print("Invalid input. Please enter a valid staff ID.")
                     selected_staff[position_id].append(next((staff for staff in available_staff if staff.id == staff_selection), None))
             else:
-                print("No staff available for this position.")
+                print("Sorry, there is no staff available for this position. ")
                 selected_staff[position_id] = []
         else:
             selected_staff[position_id] = []
@@ -98,27 +93,44 @@ def create_schedule():
                         )
                 session.add(new_schedule)
     session.commit()
-    print("Schedule created successfully!")
+    print("Your event schedule was created successfully!")
 
 # close out an event
 def closeout():
     print("Let's closeout an event!")
-    
+
     # print all active events
+    print("These are your currently open events : ")
     active = session.query(Event).filter(Event.is_active == True).all()
     print(active)
-    print("Please enter the ID of the event you would like to closeout")
+    print("Please enter the ID of the event you would like to closeout : ")
     
     # find event 
     find_id = int(input())
     event = session.query(Event).filter(Event.id == find_id).first()
-    print("This is the event you've selected.")
+    print("This is the event you've selected : ")
     print(event)
     
-    print("Your changes have been made!")
-    # make event inactive
-    event.is_active = False
-    session.commit()
+    # are you sure you'd like to proceed?
+    check = 0
+    print(f'''
+            Is this correct? This action cannot be undone. 
+            1 - YES
+            2 - NO
+        ''')
+    check = int(input())
+    while check != 3:
+        if check == 1:
+                # make event inactive
+            event.is_active = False
+            session.commit()
+            print("Great! Your changes have been saved!")
+            check = 3
+
+        if check == 2:
+            print("Oh no! Let's try that again...")
+            closeout()
+
 
 # view all event history 
 def view():
