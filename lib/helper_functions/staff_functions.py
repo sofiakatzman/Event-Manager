@@ -30,7 +30,7 @@ def add():
     print("PLEASE ENTER A NUMBER BASED ON POSITION:")
     print(session.query(Position).all())
     staff_position = int(input())
-    new_staff = Staff(staff_first_name, staff_last_name, staff_position)
+    new_staff = Staff(first_name=staff_first_name, last_name=staff_last_name, position_id=staff_position)
     session.add(new_staff)
     session.commit()
     print("User added!")

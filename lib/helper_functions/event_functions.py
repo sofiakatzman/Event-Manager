@@ -23,7 +23,7 @@ def add_event():
     new_description = str(input())
     print("Please enter Event Date: 00")
     new_date = str(input())
-    new_event = Event(name = new_name , description = new_description , date = new_date )
+    new_event = Event(type = new_name , description = new_description , date = new_date )
     session.add(new_event)
     session.commit()
 
@@ -88,16 +88,15 @@ def create_schedule():
         if staff_list:
             for staff in staff_list:
                 if staff is not None:
-                    print(f"Enter the arrival time for {staff.first_name} {staff.last_name}:")
-                    arrival_time = int(staff_time)
+                    arrival_time = staff_time
                     new_schedule = Schedule(
                         event_id=selected_event.id,
                         event_type=selected_event.type,
                         staff_id=staff.id,
                         position_id=position_id,
                         arrival_time=arrival_time
-                    )
-                    session.add(new_schedule)
+                        )
+                session.add(new_schedule)
     session.commit()
     print("Schedule created successfully!")
 
