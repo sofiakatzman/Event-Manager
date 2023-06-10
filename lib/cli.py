@@ -116,16 +116,15 @@ def main():
 ##=> 3 - enter events module     
         if choice == 3:
             events_choice = 0
-            while events_choice != 6:
+            while events_choice != 5:
                 print("Entering Events' Module...")
                 print('''
                 What would you like to do?
                     1 - CREATE AN EVENT
                     2 - CREATE AN EVENT STAFF SCHEDULE
-                    3 - EDIT AN EVENT STAFF SCHEDULE
-                    4 - CLOSE OUT AN EVENT
-                    5 - VIEW EVENT HISTORY
-                    6 - GO BACK TO MAIN MENU
+                    3 - CLOSE OUT AN EVENT
+                    4 - VIEW EVENT HISTORY
+                    5 - GO BACK TO MAIN MENU
                 ''')
 
                 events_choice = int(input())
@@ -139,27 +138,24 @@ def main():
                     reroute()
 
                 if events_choice == 3:
-                    event_functions.edit_schedule()
-                    reroute()
-
-                if events_choice == 4:
                     event_functions.closeout()
                     reroute()
 
-                if events_choice == 5:
+                if events_choice == 4:
                     event_functions.view() 
                     reroute()
                             
 ##=> 4-  enter reporting module
         reports_choice = 0
         if choice == 4:
-            while reports_choice != 3:
+            while reports_choice != 4:
                 print("Entering Reporting Module...")
                 print('''
                 What report would you like to see?
                     1 - VIEW OPEN EVENTS
-                    2 - VIEW STAFF BY POSITIONS
-                    3 - GO BACK TO MAIN MENU
+                    2 - VIEW CLOSED EVENTS
+                    3 - VIEW STAFF BY POSITIONS
+                    4 - GO BACK TO MAIN MENU
                 ''')
 
                 reports_choice = int(input())
@@ -168,8 +164,12 @@ def main():
                 if reports_choice == 1:
                     reporting_functions.view_open_events()
                     reroute()
-
+                    
                 if reports_choice == 2:
+                    reporting_functions.view_closed_events()
+                    reroute()
+
+                if reports_choice == 3:
                     reporting_functions.staff_by_position()
                     reroute()
 

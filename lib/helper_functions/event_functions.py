@@ -117,7 +117,7 @@ def closeout():
     
     print("Your changes have been made!")
     # make event inactive
-    event[0].is_active = False
+    event.is_active = False
     session.commit()
 
 # view all event history 

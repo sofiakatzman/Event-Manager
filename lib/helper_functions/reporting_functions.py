@@ -1,6 +1,7 @@
 # Reporting:
-#     4 - VIEW OPEN EVENTS - view_open_events()
-#     5 - VIEW STAFF BY POSITIONS - staff_by_position()
+#     1 - VIEW OPEN EVENTS - view_open_events()
+#     2 - VIEW CLOSED EVENTS - view_closed_events()  
+#     3 - VIEW STAFF BY POSITIONS - staff_by_position()
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -23,6 +24,18 @@ def view_open_events():
             print(f"Event Date: {event.date}")
     else:
         print("No open events found.")
+
+# view open events
+def view_closed_events():
+    print("Displaying Closed Events...")
+    open_events = session.query(Event).filter_by(is_active=False).all()
+    if open_events:
+        for event in open_events:
+            print(f"Event ID: {event.id}")
+            print(f"Event Type: {event.type}")
+            print(f"Event Date: {event.date}")
+    else:
+        print("No closed events found.")
 
 # view staff by position
 def staff_by_position():

@@ -1,7 +1,7 @@
 # Position: 
 #     1 - VIEW POSITIONS - print()
 #     2 - ADD A POSITION - add()
-#     3 - EDIT POSITION TIP OUT PERCENTAGE - edit()
+#     3 - EDIT POSITIONS NAME - edit()
 #     4 - DELETE A POSITION - delete()
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import Session
