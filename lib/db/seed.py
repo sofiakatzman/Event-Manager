@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 import random
 
-from models import (Staff, Event, Position, Tip, Schedule)
+from models import (Staff, Event, Position, Schedule)
 
 fake = Faker()
 
@@ -70,13 +70,10 @@ for event_type, event_description in event_types.items():
 schedules = []
 schedule1 = Schedule(id=1, event_type = "Art Gallery Opening", staff_id = 1, position_id = 5, arrival_time = "12:00")
 
-# Generate tip data
-tips = []
-
 # no schedule data yet
 
 print("Seeding data...")
 # Add all data to the session
-all_objects = staff + positions + events + tips + schedules
+all_objects = staff + positions + events + schedules
 session.add_all(all_objects)
 session.commit()

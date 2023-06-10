@@ -11,7 +11,6 @@ sys.path.append('./helper_functions')
 staff_functions = importlib.import_module('staff_functions')
 position_functions = importlib.import_module('position_functions')
 event_functions = importlib.import_module('event_functions')
-tip_functions = importlib.import_module('tip_functions')
 reporting_functions = importlib.import_module('reporting_functions')
 
 # rerouting after staff requested action has been completed
@@ -44,7 +43,6 @@ def main():
                     1 - USERS 
                     2 - POSITIONS
                     3 - EVENTS
-                    4 - STAFF TIPS
                     5 - REPORTS
                     6 - EXIT
         ''')
@@ -94,7 +92,7 @@ def main():
                 What would you like to do?
                     1 - VIEW POSITIONS
                     2 - ADD A POSITION
-                    3 - EDIT POSITION TIP OUT PERCENTAGE
+                    3 - EDIT POSITION NAME
                     4 - DELETE A POSITION
                     5 - GO BACK TO MAIN MENU
                 ''')
@@ -156,62 +154,26 @@ def main():
                     reroute()
                             
 
-        ## enter staff tips module (4)
-        if choice == 4:
-            staff_tips_choice = 0
-            while staff_tips_choice != 3:
-                print("Entering Staff Tips' Module...")
-                print('''
-                What would you like to do?
-                    1 - CALCULATE STAFF TIP PAYOUT BY EVENT
-                    2 - PAY OUT STAFF
-                    3 - GO BACK TO MAIN MENU
-                ''')
-
-                staff_tips_choice = int(input())
-
-                if staff_tips_choice == 1:
-                    tip_functions.tipout()
-                    reroute()
-                
-                if staff_tips_choice == 2:
-                    tip_functions.payout()
-                    reroute()
-
         ## enter reporting module (5)
         reports_choice = 0
         if choice == 5:
-            while reports_choice != 6:
+            while reports_choice != 3:
                 print("Entering Reporting Module...")
                 print('''
                 What report would you like to see?
-                    1 - VIEW TIP TOTALS BY EVENT
-                    2 - CALCULATE USER WAGE YTD
-                    3 - CALCULATE PAYROLL COST
-                    4 - VIEW OPEN EVENTS
-                    5 - VIEW STAFF BY POSITIONS
-                    6 - GO BACK TO MAIN MENU
+                    1 - VIEW OPEN EVENTS
+                    2 - VIEW STAFF BY POSITIONS
+                    3 - GO BACK TO MAIN MENU
                 ''')
 
                 reports_choice = int(input())
 
+
                 if reports_choice == 1:
-                    reporting_functions.tips_by_event()
-                    reroute()
-                
-                if reports_choice == 2:
-                    reporting_functions.wage_ytd()
-                    reroute()
-
-                if reports_choice == 3:
-                    reporting_functions.payroll_cost()
-                    reroute()
-
-                if reports_choice == 4:
                     reporting_functions.view_open_events()
                     reroute()
 
-                if reports_choice == 5:
+                if reports_choice == 2:
                     reporting_functions.staff_by_position()
                     reroute()
 
@@ -239,13 +201,7 @@ if __name__ == "__main__":
 # 4 - CLOSE OUT AN EVENT - closeout()
 # 5 - VIEW EVENT HISTORY - view()
 
-# Tips Module (Main menu choice = 4): tip_functions.py
-# 1 - CALCULATE STAFF TIP PAYOUT BY EVENT - tipout()
-# 2 - PAY OUT STAFF - payout()
 
 # Reporting Module (Main menu choice = 5): reporting_functions.py
-# 1 - VIEW TIP TOTALS BY EVENT - tips_by_event()
-# 2 - CALCULATE USER WAGE YTD - wage_ytd()
-# 3 - CALCULATE PAYROLL COST - payroll_cost()
-# 4 - VIEW OPEN EVENTS - view_open_events()
-# 5 - VIEW STAFF BY POSITIONS - staff_by_position()
+# 1 - VIEW OPEN EVENTS - view_open_events()
+# 2 - VIEW STAFF BY POSITIONS - staff_by_position()

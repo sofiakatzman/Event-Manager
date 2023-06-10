@@ -16,7 +16,7 @@ def test():
 
 # view positions 
 def view():
-    print("These are your saved positions & their tip percentages")
+    print("These are your saved positions")
     print(session.query(Position).all())
 
 # add a position
@@ -30,21 +30,21 @@ def add():
     session.commit()
     print(f"Congrat's! Position : {new_title} was added!")
 
-# edit position tip out percentage
+# edit position name
 def edit():
-    print("Let's edit a Tip Out Percentag!")
-    print("This is your current tipout data:")
+    print("Let's edit a position's name!")
+    print("This is your current positonal data:")
     print(session.query(Position).all())
-    print("Please enter the ID of the position who's tip distribution percentage you want to edit:")
-    tip_id = int(input())
-    edit_tip = session.query(Position).get(tip_id)
-    if edit_tip != None: 
-        print(edit_tip)
-        print(f"What would you like the new value of the {edit_tip.name}?")
-        new_tip = int(input())
+    print("Please enter the ID of the position who's name you'd like to edit:")
+    edit_id = int(input())
+    edit_id = session.query(Position).get(edit_id)
+    if edit_id != None: 
+        print(edit_id)
+        print(f"What would you like the new name of {edit_id.name}?")
+        new_name = int(input())
         print(f'''
-        OLD TIP FOR {edit_tip.name} : {edit_tip.tipout_percent}
-        NEW TIP FOR {edit_tip.name} : {new_tip}
+        OLD NAME : {edit_id.name}
+        NEW NAME : {edit_id.name}
 
             Is this correct?
             1 - YES
@@ -54,7 +54,6 @@ def edit():
         while check != 3:
             if check == 1:
                 print("Your changes have been saved!")
-                edit_tip.tipout_percent = new_tip
                 session.commit()
                 check = 3
     
