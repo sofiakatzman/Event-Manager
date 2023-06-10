@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 import random
 
-from models import (Users, Events, Positions, Tips, Schedules)
+from models import (Staff, Event, Position, Tip, Schedule)
 
 fake = Faker()
 
@@ -12,21 +12,21 @@ engine = create_engine("sqlite:///event_manager.db")
 session = Session(engine, future=True)
 
 # clear data when session runs
-session.query(Users).delete()
-session.query(Positions).delete()
-session.query(Events).delete()
-session.query(Tips).delete()
-session.query(Schedules).delete()
+session.query(Staff).delete()
+session.query(Position).delete()
+session.query(Event).delete()
+session.query(Tip).delete()
+session.query(Schedule).delete()
 
-# generate users seeded data
-users = []
+# generate staff seeded data
+staff = []
 for i in range(75):
-    user = Users(
+    new_staff = Staff(
         first_name=f'{fake.first_name()}',
         last_name=f'{fake.last_name()}',
         position_id=random.randint(0, 5)
     )
-    users.append(user)
+    staff.append(new_staff)
 
 # generate position data
 positions_list = {
@@ -40,7 +40,7 @@ positions_list = {
 
 positions = []
 for position_id, position_name in positions_list.items():
-    position = Positions(
+    position = Position(
         id=position_id,
         name=position_name
     )
@@ -56,7 +56,7 @@ events = []
 start_date = date(2022, 1, 1)
 end_date = date(2023, 6, 1)
 for event_type, event_description in event_types.items():
-    event = Events(
+    event = Event(
         type = f'{event_type}',
         description = f'{event_description}',
         date = f'{fake.date_between_dates(date_start=start_date, date_end=end_date)}'
@@ -66,11 +66,9 @@ for event_type, event_description in event_types.items():
 # Generate schedule data
 # no schedule data yet
 
-# def __init__(self, event_id, event_type, user_id, position_id, arrival_time=0000):
+# def __init__(self, event_id, event_type, staff_id, position_id, arrival_time=0000):
 schedules = []
-schedule1 = Schedules(1,"Art Gallery Opening", 1, 5, "12:00")
-schedule2 = Schedules(1,"Art Gallery Opening", 1, 5, "12:00")
-schedules.append(schedule1)
+schedule1 = Schedule(id=1, event_type = "Art Gallery Opening", staff_id = 1, position_id = 5, arrival_time = "12:00")
 
 # Generate tip data
 tips = []
@@ -79,6 +77,6 @@ tips = []
 
 print("Seeding data...")
 # Add all data to the session
-all_objects = users + positions + events + tips + schedules
+all_objects = staff + positions + events + tips + schedules
 session.add_all(all_objects)
 session.commit()

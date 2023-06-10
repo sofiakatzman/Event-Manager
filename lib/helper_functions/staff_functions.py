@@ -1,12 +1,12 @@
-# User: 
-# add user input validation to all of theese: 
+# Staff: 
+# add staff input validation to all of theese: 
 #     1 - VIEW USERS - print() 
 #     2 - ADD A USER - add()
 #     3 - EDIT A USER - edit()
 #     4 - DELETE A USER - delete() 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import (Users, Positions)
+from db.models import (Staff, Position)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
@@ -14,37 +14,37 @@ session = Session(engine, future=True)
 def test():
     print("Testing passed for User Module!")
 
-# view users 
+# view staff 
 def view():
     print("Printing all of your staff...")    
-    print(session.query(Users).all())
+    print(session.query(Staff).all())
 
-# add a user
+# add a staff
 def add():
     print("Let's add new staff!")
     print("What is your staff member's first name?")
-    user_first_name = str(input())
+    staff_first_name = str(input())
     print("What is your staff member's last name?")
-    user_last_name = str(input())
+    staff_last_name = str(input())
     print("What position will they be working?")
     print("PLEASE ENTER A NUMBER BASED ON POSITION:")
-    print(session.query(Positions).all())
-    user_position = int(input())
-    new_user = Users(user_first_name, user_last_name, user_position)
-    session.add(new_user)
+    print(session.query(Position).all())
+    staff_position = int(input())
+    new_staff = Staff(staff_first_name, staff_last_name, staff_position)
+    session.add(new_staff)
     session.commit()
     print("User added!")
 
-# edit a user
+# edit a staff
 def edit():
-    print("Let's edit a user!")
-    print("This is your current user data:")
-    print(session.query(Users).all())
-    print("Please enter the ID of the user you want to edit:")
-    user_id = int(input())
-    user_data = session.query(Users).get(user_id)
-    if user_data != None: 
-        print(user_data)
+    print("Let's edit a staff!")
+    print("This is your current staff data:")
+    print(session.query(Staff).all())
+    print("Please enter the ID of the staff you want to edit:")
+    staff_id = int(input())
+    staff_data = session.query(Staff).get(staff_id)
+    if staff_data != None: 
+        print(staff_data)
         edit_choice = 0
         print(f'''
               What would you like to edit?
@@ -56,10 +56,10 @@ def edit():
         edit_choice = int(input())
         while edit_choice !=4:
 
-            #=> edit user first name
+            #=> edit staff first name
             if edit_choice == 1:
                 print("You've selected: Edit User First Name")
-                print(f"What would you like '{user_data.first_name}' to be changed to?")
+                print(f"What would you like '{staff_data.first_name}' to be changed to?")
                 new_first_name = str(input())
                 check = 0
                 print(f'''
@@ -70,7 +70,7 @@ def edit():
                 check = int(input())
                 while check != 3:
                     if check == 1:
-                        user_data.first_name = new_first_name
+                        staff_data.first_name = new_first_name
                         session.commit()
                         print("Change made!")
                         check = 3            
@@ -80,10 +80,10 @@ def edit():
                         edit()
                 edit_choice = 4
 
-            #=> edit user last name
+            #=> edit staff last name
             if edit_choice == 2:
                 print("You've selected: Edit User Last Name")
-                print(f'What would you like "{user_data.last_name}" to be changed to?')
+                print(f'What would you like "{staff_data.last_name}" to be changed to?')
                 new_last_name = str(input())
                 check = 0
                 print(f'''
@@ -94,7 +94,7 @@ def edit():
                 check = int(input())
                 while check != 3:
                     if check == 1:
-                        user_data.last_name = new_last_name
+                        staff_data.last_name = new_last_name
                         print("Change made!")
                         check = 3
             
@@ -104,11 +104,11 @@ def edit():
                         edit()
                 edit_choice = 4
             
-            #=> edit user position
+            #=> edit staff position
             if edit_choice == 3:
                 print("You've selected: Edit User Position")
-                print(f'What would you like "{user_data.position_id}" to be changed to?')
-                print(session.query(Positions).all())
+                print(f'What would you like "{staff_data.position_id}" to be changed to?')
+                print(session.query(Position).all())
                 new_position = int(input())
                 check = 0
                 print(f'''
@@ -119,7 +119,7 @@ def edit():
                 check = int(input())
                 while check != 3:
                     if check == 1:
-                        user_data.position_id = new_position
+                        staff_data.position_id = new_position
                         print("Change made!")
                         session.commit()
                         check = 3
@@ -129,20 +129,20 @@ def edit():
                         edit()
                 edit_choice = 4
 
-# delete a user 
+# delete a staff 
 def delete():
     print("You've selected : Delete User!")
-    print("This is your current user data:")
-    print(session.query(Users).all())
-    print("Please enter the ID of the user you want to delete.")
+    print("This is your current staff data:")
+    print(session.query(Staff).all())
+    print("Please enter the ID of the staff you want to delete.")
     print("NOTE: THIS CANNOT BE UNDONE.")
-    user_id = int(input())
-    user_data = session.query(Users).get(user_id)
-    if user_data != None: 
-        print(user_data)
+    staff_id = int(input())
+    staff_data = session.query(Staff).get(staff_id)
+    if staff_data != None: 
+        print(staff_data)
         delete_choice = 0
         print(f'''
-                Are you sure you want to permanently delete {user_data.first_name} {user_data.last_name}?
+                Are you sure you want to permanently delete {staff_data.first_name} {staff_data.last_name}?
                 You will not be able to access their records if you continue with this change.  
                     1 - YES
                     2 - NO
@@ -151,8 +151,8 @@ def delete():
         delete_choice = int(input())
         while delete_choice !=3:
             if delete_choice == 1:
-                session.delete(user_data)
-                print(f"{user_data.first_name} {user_data.last_name} has been permanently deleted.")
+                session.delete(staff_data)
+                print(f"{staff_data.first_name} {staff_data.last_name} has been permanently deleted.")
                 session.commit()
                 delete_choice = 3
                 

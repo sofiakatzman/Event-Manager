@@ -2,20 +2,19 @@ import sys
 import importlib
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import (Events)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
 
 sys.path.append('./helper_functions')
 
-user_functions = importlib.import_module('user_functions')
+staff_functions = importlib.import_module('staff_functions')
 position_functions = importlib.import_module('position_functions')
 event_functions = importlib.import_module('event_functions')
 tip_functions = importlib.import_module('tip_functions')
 reporting_functions = importlib.import_module('reporting_functions')
 
-# rerouting after user requested action has been completed
+# rerouting after staff requested action has been completed
 def reroute():
     reroute_choice = 0
     while reroute_choice !=1:  
@@ -52,12 +51,12 @@ def main():
 
         choice = int(input()) 
 
-        # enter users module (1)
+        # enter staffs module (1)
         
         if choice == 1:
-            user_choice = 0  
-            while user_choice != 5:
-                print("Entering Users' Module...")
+            staff_choice = 0  
+            while staff_choice != 5:
+                print("Entering Staffs' Module...")
                 print('''
                 What would you like to do?
                     1 - VIEW USERS
@@ -67,22 +66,22 @@ def main():
                     5 - GO BACK TO MAIN MENU
                 ''')
 
-                user_choice = int(input())
+                staff_choice = int(input())
 
-                if user_choice == 1:
-                    user_functions.view() 
+                if staff_choice == 1:
+                    staff_functions.view() 
                     reroute()
 
-                if user_choice == 2:
-                    user_functions.add()
+                if staff_choice == 2:
+                    staff_functions.add()
                     reroute()
 
-                if user_choice == 3:
-                    user_functions.edit()
+                if staff_choice == 3:
+                    staff_functions.edit()
                     reroute()
 
-                if user_choice == 4:
-                    user_functions.delete()
+                if staff_choice == 4:
+                    staff_functions.delete()
                     reroute()
 
         ## enter positions module (2)
@@ -221,7 +220,7 @@ if __name__ == "__main__":
     main()
 
 # Helper Functions By Module Key: location = /lib/helper_functions
-# User Module (Main menu choice = 1): user_functions.py
+# Staff Module (Main menu choice = 1): staff_functions.py
 # 1 - VIEW USERS - view()
 # 2 - ADD A USER - add()
 # 3 - EDIT A USER - edit()

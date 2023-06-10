@@ -3,7 +3,7 @@
 #     2 - PAY OUT STAFF - payout()
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import (Tips)
+from db.models import (Tip)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)

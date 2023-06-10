@@ -7,7 +7,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import Events, Positions, Users, Tips, Schedules
+from db.models import Event, Position, Staff, Tip, Schedule
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
@@ -20,13 +20,13 @@ def tips_by_event():
     print("Viewing tip totals by event...")
     print("Enter the ID of the event:")
     event_id = int(input())
-    event = session.query(Events).get(event_id)
+    event = session.query(Event).get(event_id)
     if event is not None:
         # Perform the logic to calculate and display tip totals for the event
-        tips = session.query(Tips).filter_by(event_id=event_id).all()
+        tips = session.query(Tip).filter_by(event_id=event_id).all()
         if tips:
             for tip in tips:
-                user = session.query(Users).get(tip.user_id)
+                user = session.query(Staff).get(tip.user_id)
                 print(f"User: {user.first_name} {user.last_name}")
                 print(f"Tip Amount: {tip.tipout_amount}")
         else:
@@ -40,7 +40,7 @@ def wage_ytd():
 #     print("Calculating user wage YTD...")
 #     print("Enter the ID of the user:")
 #     user_id = int(input())
-#     user = session.query(Users).get(user_id)
+#     user = session.query(Staff).get(user_id)
 #     if user is not None:
 #         # Perform the logic to calculate and display the user's wage year-to-date
 #         schedules = session.query(Schedules).filter_by(user_id=user_id).all()
@@ -58,7 +58,7 @@ def payroll_cost():
 # view open events
 def view_open_events():
     print("Displaying Open Events...")
-    open_events = session.query(Events).filter_by(is_active=True).all()
+    open_events = session.query(Event).filter_by(is_active=True).all()
     if open_events:
         for event in open_events:
             print(f"Event ID: {event.id}")
@@ -70,10 +70,10 @@ def view_open_events():
 # view staff by position
 def staff_by_position():
     print("Displaying Staff By Position...")
-    positions = session.query(Positions).all()
+    positions = session.query(Position).all()
     for position in positions:
         print(f"Position: {position.name}")
-        staff = session.query(Users).filter_by(position_id=position.id).all()
+        staff = session.query(Staff).filter_by(position_id=position.id).all()
         if staff:
             for user in staff:
                 print(f"User: {user.first_name} {user.last_name}")

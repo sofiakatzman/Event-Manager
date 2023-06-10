@@ -6,7 +6,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import (Events, Schedules, Positions, Tips, Users)
+from db.models import (Event, Schedule, Position, Tip, Staff)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
@@ -23,7 +23,7 @@ def add_event():
     new_description = str(input())
     print("Please enter Event Date: 00")
     new_date = str(input())
-    new_event = Events(name = new_name , description = new_description , date = new_date )
+    new_event = Event(name = new_name , description = new_description , date = new_date )
     session.add(new_event)
     session.commit()
 
@@ -32,32 +32,32 @@ def create_schedule():
     print("Let's create a schedule...")
     # print all events 
     print("What event would you like to create a schedule for?")
-    all_active_events = session.query(Events).filter(Events.is_active == True).all()
+    all_active_events = session.query(Event).filter(Event.is_active == True).all()
     print(all_active_events)
     event_selection = int(input())
 
     print("This is the event you've selected:")
-    selected_event = session.query(Events).filter(Events.id == event_selection).first()
+    selected_event = session.query(Event).filter(Event.id == event_selection).first()
     print(selected_event)
 
     # new_schedule = Schedules()
 
     # iterate through the positions table positions to capture how many of each type of staff you want to hire 
-    positions = session.query(Positions).all()
+    positions = session.query(Position).all()
     staff_counts = {}
     for position in positions:
         print(f"How many {position.name} staff do you want to add?")
         count = int(input())
         staff_counts[position.id] = count
 
-        # ask user to pick staff based on position -- DICTIONARY! 
+    # ask user to pick staff based on position -- DICTIONARY! 
     selected_staff = {}
     for position_id, count in staff_counts.items():
         staff_time = None
         if count > 0:
             staff_time = input(f"Enter the time for {next((p.name for p in positions if p.id == position_id), '')}: ")
             print(f"Select {count} staff for {next((p.name for p in positions if p.id == position_id), '')}:")
-            available_staff = session.query(Users).filter(Users.position_id == position_id).all()
+            available_staff = session.query(Staff).filter(Staff.position_id == position_id).all()
             selected_staff[position_id] = []
             if available_staff:
                 for staff in available_staff:
@@ -83,17 +83,17 @@ def create_schedule():
         else:
             selected_staff[position_id] = []
 
-    # create a Schedule entry per staff that uses the event name, position id, user id, time of arrival, etc.
+    # create a Schedule entry per staff that uses the event name, position id, staff id, time of arrival, etc.
     for position_id, staff_list in selected_staff.items():
         if staff_list:
             for staff in staff_list:
                 if staff is not None:
                     print(f"Enter the arrival time for {staff.first_name} {staff.last_name}:")
                     arrival_time = int(staff_time)
-                    new_schedule = Schedules(
+                    new_schedule = Schedule(
                         event_id=selected_event.id,
                         event_type=selected_event.type,
-                        user_id=staff.id,
+                        staff_id=staff.id,
                         position_id=position_id,
                         arrival_time=arrival_time
                     )
@@ -121,13 +121,13 @@ def closeout():
     print("Let's closeout an event!")
     
     # print all active events
-    active = session.query(Events).filter(Events.is_active == True).all()
+    active = session.query(Event).filter(Event.is_active == True).all()
     print(active)
     print("Please enter the ID of the event you would like to closeout")
     
     # find event 
     find_id = int(input())
-    event = session.query(Events).filter(Events.id == find_id).first()
+    event = session.query(Event).filter(Event.id == find_id).first()
     print("This is the event you've selected.")
 
 # removing concept of tipout closing, kiss - 
@@ -143,9 +143,8 @@ def closeout():
 
 # add logic that counts the amount of each type of staff 
     
-    # for scheduled in event_schedule:
     #     event_id = find_id
-    #     user_id = scheduled.user_id    
+    #     staff = scheduled.staff_id    
 
     #     # find position of current scheduled employee
     #     position = session.query(Positions).filter(Positions.id == scheduled.position_id).first()    
@@ -163,7 +162,7 @@ def closeout():
     #     tipout_amount = tip_out_amount
 
     #     # create new tips entry : 
-    #     Tips(event_id=event_id, user_id=user_id, tipout_amount=tipout_amount )
+    #     Tips(event_id=event_id, staff_id=staff_id, tipout_amount=tipout_amount )
     #     session.commit()
 
     print("Your changes have been made!")
@@ -193,13 +192,13 @@ def closeout():
 # view all event history 
 def view():
     print("Printing Event History...")  
-    active = session.query(Events).all()
+    active = session.query(Event).all()
     print(active)
 
 
 
 
  # submit tipout
-    # create tipout from data: event_id, user_id, tipout_amount + tiout amounts calculated above
+    # create tipout from data: event_id, staff_id, tipout_amount + tiout amounts calculated above
     # query that will return staff  
     # for every staff memeber that is in event - create a tipout 
