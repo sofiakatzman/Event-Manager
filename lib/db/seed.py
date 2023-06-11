@@ -15,7 +15,6 @@ session = Session(engine, future=True)
 session.query(Staff).delete()
 session.query(Position).delete()
 session.query(Event).delete()
-session.query(Tip).delete()
 session.query(Schedule).delete()
 
 # generate staff seeded data

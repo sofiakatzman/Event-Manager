@@ -13,9 +13,11 @@ class Staff(Base):
 
     def __repr__(self):
         return f''' 
-            ID: {self.id}
-            Name: {self.first_name} {self.last_name}
-            Position: {self.position_id}
+                    ID: {self.id}
+                    Name: {self.first_name} {self.last_name}
+                    Position ID: {self.position_id}
+                    
+                --------------------------------------
         '''  
 
 class Event(Base):
@@ -29,12 +31,14 @@ class Event(Base):
 
     def __repr__(self):
         return f''' 
-            Event ID : {self.id}
-            Event Type: {self.type}
-            Event Description: {self.description}
-            Event Date: {self.date}
-            Event is Active ? : {self.is_active}
-            Event Staff: TBD  
+                    Event ID : {self.id}
+                    Event Type: {self.type}
+                    Event Description: {self.description}
+                    Event Date: {self.date}
+                    Event is Active ? : {self.is_active}
+                    Event Staff: TBD
+
+                --------------------------------------  
         '''
          
     def close_out_event(self):
@@ -49,8 +53,10 @@ class Position(Base):
 
     def __repr__(self):
         return f''' 
-            Position ID : {self.id}
-            Position Name : {self.name}
+                    Position ID : {self.id}
+                    Position Name : {self.name}
+
+                --------------------------------------
         '''
     
 
@@ -66,12 +72,14 @@ class Schedule(Base):
 
     def __repr__(self):
         return f''' 
-                Event ID : {self.event_id}
-                Event Type : {self.event_type}
-                Staff ID : {self.staff_id}
-                Position : {self.position_id}
-                Arrival Time : {self.arrival_time}
-        '''
+                    Event ID : {self.event_id}
+                    Event Type : {self.event_type}
+                    Staff ID : {self.staff_id}
+                    Position : {self.position_id}
+                    Arrival Time : {self.arrival_time}
+
+                 --------------------------------------
+               '''
         
 
 
