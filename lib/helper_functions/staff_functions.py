@@ -1,18 +1,9 @@
-# Staff: 
-# add staff input validation to all of theese: 
-#     1 - VIEW USERS - print() 
-#     2 - ADD A USER - add()
-#     3 - EDIT A USER - edit()
-#     4 - DELETE A USER - delete() 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from db.models import (Staff, Position)
 
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
-
-def test():
-    print("Testing passed for User Module!")
 
 # view staff 
 def view():
@@ -26,21 +17,21 @@ def add():
     staff_first_name = str(input())
     print("What is your staff member's last name?")
     staff_last_name = str(input())
-    print("What position will they be working?")
-    print("PLEASE ENTER A NUMBER BASED ON POSITION:")
+    print(f"What position will {staff_first_name} {staff_last_name} be working?")
+    print("Please enter the Position ID : ")
     print(session.query(Position).all())
     staff_position = int(input())
     new_staff = Staff(first_name=staff_first_name, last_name=staff_last_name, position_id=staff_position)
     session.add(new_staff)
     session.commit()
-    print("User added!")
+    print(f"Staff member, {staff_first_name} {staff_last_name}, has been added!")
 
 # edit a staff
 def edit():
-    print("Let's edit a staff!")
+    print("Let's edit a staff member's info!")
     print("This is your current staff data:")
     print(session.query(Staff).all())
-    print("Please enter the ID of the staff you want to edit:")
+    print("Please enter the ID of the staff member you want to edit:")
     staff_id = int(input())
     staff_data = session.query(Staff).get(staff_id)
     if staff_data != None: 
@@ -72,7 +63,7 @@ def edit():
                     if check == 1:
                         staff_data.first_name = new_first_name
                         session.commit()
-                        print("Change made!")
+                        print("Great, your change was made!")
                         check = 3            
 
                     if check == 2:
@@ -97,7 +88,6 @@ def edit():
                         staff_data.last_name = new_last_name
                         print("Change made!")
                         check = 3
-            
 
                     if check == 2:
                         print("Oh no! Let's try that again...")
@@ -120,7 +110,7 @@ def edit():
                 while check != 3:
                     if check == 1:
                         staff_data.position_id = new_position
-                        print("Change made!")
+                        print("Your change has been made!")
                         session.commit()
                         check = 3
                         
@@ -129,9 +119,9 @@ def edit():
                         edit()
                 edit_choice = 4
 
-# delete a staff 
+# delete staff 
 def delete():
-    print("You've selected : Delete User!")
+    print("You've selected to delete a staff member!")
     print("This is your current staff data:")
     print(session.query(Staff).all())
     print("Please enter the ID of the staff you want to delete.")
@@ -147,7 +137,7 @@ def delete():
                     1 - YES
                     2 - NO
                 ''')
-        #=> would like to add a query and check that blocks this activity if staff is scheduled to work an open event 
+ 
         delete_choice = int(input())
         while delete_choice !=3:
             if delete_choice == 1:
@@ -155,12 +145,9 @@ def delete():
                 print(f"{staff_data.first_name} {staff_data.last_name} has been permanently deleted.")
                 session.commit()
                 delete_choice = 3
-                
-                
             if delete_choice == 2:
                 print("Oh no! Let's try that again...")
                 delete()
-    
         delete_choice = 3
             
         

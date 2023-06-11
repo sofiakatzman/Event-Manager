@@ -5,9 +5,6 @@ from db.models import (Event, Schedule, Position, Staff)
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
 
-def test():
-    print('Entering Event Module...')
-
 # create an event
 def add_event():
     print("Let's crate an event...")
@@ -30,10 +27,10 @@ def create_schedule():
     print(all_active_events)
     event_selection = int(input())
 
-    print("You've Selected:")
+    print("You've Selected :")
     selected_event = session.query(Event).filter(Event.id == event_selection).first()
     print(selected_event)
-    print("Initiating create schedule...")
+    print("Initiating schedule creation...")
 
     # new_schedule = Schedules()
 
@@ -41,22 +38,25 @@ def create_schedule():
     positions = session.query(Position).all()
     staff_counts = {}
     for position in positions:
-        print(f"How many {position.name} will you need for the event?")
+        print(f"How many {position.name} staff will you need for the event?")
         count = int(input())
         staff_counts[position.id] = count
 
-    # ask user to pick staff based on position -- DICTIONARY! 
+    # ask user to pick staff based on position 
     selected_staff = {}
     for position_id, count in staff_counts.items():
         staff_time = None
         if count > 0:
-            staff_time = input(f"What time should{next((p.name for p in positions if p.id == position_id), '')}s arrive? : ")
-            print(f"Please pick {count}{next((p.name for p in positions if p.id == position_id), '')} to work the event :")
+            staff_time = input(f"What time should {next((p.name for p in positions if p.id == position_id), '')}s arrive? : ")
+            print(f"Please pick {count} {next((p.name for p in positions if p.id == position_id), '')} to work the event :")
             available_staff = session.query(Staff).filter(Staff.position_id == position_id).all()
             selected_staff[position_id] = []
             if available_staff:
                 for staff in available_staff:
-                    print(f"{staff.id}. {staff.first_name} {staff.last_name}")
+                    print(f''' 
+                                Staff ID: {staff.id}
+                                Staff Name: {staff.first_name} {staff.last_name}
+                            ''')
                 for _ in range(count):
                     while True:
                         staff_selection = input("Enter the ID of the staff member youd like to book: ")
@@ -77,6 +77,7 @@ def create_schedule():
                 selected_staff[position_id] = []
         else:
             selected_staff[position_id] = []
+
 
     # create a Schedule entry per staff that uses the event name, position id, staff id, time of arrival, etc.
     for position_id, staff_list in selected_staff.items():
@@ -114,14 +115,14 @@ def closeout():
     # are you sure you'd like to proceed?
     check = 0
     print(f'''
-            Is this correct? This action cannot be undone. 
+            Please confirm if this is correct. This action cannot be undone. 
             1 - YES
             2 - NO
         ''')
     check = int(input())
     while check != 3:
         if check == 1:
-                # make event inactive
+            # make event inactive
             event.is_active = False
             session.commit()
             print("Great! Your changes have been saved!")
