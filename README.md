@@ -53,9 +53,8 @@ To install and run Event Manager, ensure that you have Python 3 and pip installe
 6. Run `python cli.py` to start using Event Manager.
 
 ## Usage Visuals
-![main menu of Event Manager](https://i.imgur.com/fYtvHDn.png)
-![sample user path](https://imgur.com/nPl38De.png)
-![goodbye exit screen](https://imgur.com/p4dfPBC.png)
+![sample user path - main menu to positions](https://imgur.com/farRGDD.png)
+![sample user path - event schedule reporting](https://imgur.com/4MVv2W3.png)
 
 ## Contributing
 Pull requests for review are welcome. However, major changes are not allowed.
