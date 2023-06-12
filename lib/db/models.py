@@ -9,8 +9,7 @@ class Staff(Base):
     id = Column(Integer(), primary_key=True)
     first_name = Column(String())
     last_name = Column(String())
-    position_id = Column(Integer(), ForeignKey('position.id'))  # this is a foreign key
-
+    position_id = Column(Integer(), ForeignKey('position.id'))
     def __repr__(self):
         return f''' 
                     ID: {self.id}
@@ -64,10 +63,10 @@ class Schedule(Base):
     __tablename__ = 'schedule'
 
     id = Column(Integer(), primary_key=True)
-    event_id = Column(Integer(), ForeignKey("event.id")) # this is a foreign key 
+    event_id = Column(Integer(), ForeignKey("event.id"))
     event_type = Column(String())
-    staff_id = Column(Integer(), ForeignKey("staff.id")) # this is a foreign key 
-    position_id = Column(Integer(), ForeignKey("position.id")) # this is a foreign key
+    staff_id = Column(Integer(), ForeignKey("staff.id")) 
+    position_id = Column(Integer(), ForeignKey("position.id")) 
     arrival_time = Column(Integer())
 
     def __repr__(self):
