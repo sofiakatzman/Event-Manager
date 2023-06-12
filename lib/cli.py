@@ -14,30 +14,28 @@ position_functions = importlib.import_module('position_functions')
 event_functions = importlib.import_module('event_functions')
 reporting_functions = importlib.import_module('reporting_functions')
 
-# rerouting after staff requested action has been completed
+# run at application launch 
 def greeting():
-    print("")
     print("")
     print(Figlet(font = "slant").renderText('Event Manager'))
     print("                Hello! Welcome to Event Manager!")
     print("                Please use number keys to navigate.")
-    print("")
-    # print(".........................................................................")
 
-
+# rerouting after staff requested action has been completed
 def reroute():
     reroute_choice = 0
     while reroute_choice !=1:  
         print(f'''
             
                 Would you like to stay in this module?
-                  
+                --------------------------------------
                     1 : YES
+              
                     2 : NO - GO TO MAIN MENU 
               
         ''')
 
-        reroute_choice = int(input("                    "))
+        reroute_choice = int(input("                    > : "))
 
         if reroute_choice == 1:
             print("")
@@ -50,7 +48,7 @@ def main():
 #=> enter main menu choice options
     choice = 0
     while choice != 5:
-        
+        print("")
         print(Figlet(font = "rectangles").renderText('          MENU'))
         print('''
                 What module would you like to enter? 
@@ -67,12 +65,13 @@ def main():
 
         ''')
 
-        choice = int(input("                        ")) 
+        choice = int(input("                    > : ")) 
 
 #=> 1 - enter staffs module
         if choice == 1:
             staff_choice = 0  
             while staff_choice != 5:
+                print("")
                 print(Figlet(font = "straight").renderText('          STAFF'))
                 print('''
                 What would you like to do?
@@ -89,7 +88,7 @@ def main():
 
                 ''')
 
-                staff_choice = int(input("                        "))
+                staff_choice = int(input("                    > : "))
 
                 if staff_choice == 1:
                     staff_functions.view() 
@@ -111,6 +110,7 @@ def main():
         if choice == 2:
             position_choice = 0
             while position_choice != 5:
+                print("")
                 print(Figlet(font = "straight").renderText('          POSITIONS'))
                 print('''
                 What would you like to do?
@@ -126,7 +126,7 @@ def main():
                     5 : GO BACK TO MAIN MENU
                 ''')
 
-                position_choice = int(input("                        "))
+                position_choice = int(input("                    > : "))
 
                 if position_choice == 1:
                     position_functions.view()
@@ -148,6 +148,7 @@ def main():
         if choice == 3:
             events_choice = 0
             while events_choice != 5:
+                print("")
                 print(Figlet(font = "straight").renderText('          EVENTS'))
                 print('''
                 What would you like to do?
@@ -164,7 +165,7 @@ def main():
 
                 ''')
 
-                events_choice = int(input("                        "))
+                events_choice = int(input("                    > : "))
 
                 if events_choice == 1:
                     event_functions.add_event() 
@@ -185,7 +186,8 @@ def main():
 ##=> 4-  enter reporting module
         reports_choice = 0
         if choice == 4:
-            while reports_choice != 4:
+            while reports_choice != 5:
+                print("")
                 print(Figlet(font = "straight").renderText('          REPORTS'))
                 print('''
                 What report would you like to see?
@@ -196,11 +198,13 @@ def main():
 
                     3 : VIEW STAFF BY POSITIONS
 
-                    4 : GO BACK TO MAIN MENU
+                    4 : VIEW EVENT SCHEDULES
+
+                    5 : GO BACK TO MAIN MENU
                     
                 ''')
 
-                reports_choice = int(input("                        "))
+                reports_choice = int(input("                    > : "))
 
 
                 if reports_choice == 1:
@@ -215,8 +219,13 @@ def main():
                     reporting_functions.staff_by_position()
                     reroute()
 
+                if reports_choice == 4:
+                    reporting_functions.view_event_schedules()
+                    reroute()
+                
+
     if choice == 5:
-        return print(Figlet(font = "speed").renderText('         bye'))
+        return print(Figlet(font = "speed").renderText('''         bye'''))
 
 if __name__ == "__main__":
     greeting()

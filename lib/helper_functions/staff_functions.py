@@ -15,15 +15,15 @@ def view():
 def add():
     print("                  Let's add new staff!")
     print("                  What is your staff member's first name?")
-    staff_first_name = str(input("                        "))
+    staff_first_name = str(input("                    > : "))
     print("                  What is your staff member's last name?")
-    staff_last_name = str(input("                        "))
+    staff_last_name = str(input("                    > : "))
     print(f"                  What position will {staff_first_name} {staff_last_name} be working?")
     print("                      A L L  P O S I T I O N S ")
     print("                --------------------------------------")
     print("                  Please enter the Position ID : ")  
     print(session.query(Position).all())
-    staff_position = str(input("                        "))
+    staff_position = str(input("                    > : "))
     new_staff = Staff(first_name=staff_first_name, last_name=staff_last_name, position_id=staff_position)
     session.add(new_staff)
     session.commit()
@@ -37,7 +37,7 @@ def edit():
     print("                --------------------------------------")  
     print(session.query(Staff).all())
     print("                  Please enter the ID of the staff member you want to edit:")
-    staff_id = int(input("                        "))
+    staff_id = int(input("                    > : "))
     staff_data = session.query(Staff).get(staff_id)
     if staff_data != None: 
         print(staff_data)
@@ -53,7 +53,7 @@ def edit():
 
                     4 : NEVERMIND
                     ''')
-        edit_choice = int(input("                        "))
+        edit_choice = int(input("                    > : "))
         while edit_choice !=4:
 
             #=> edit staff first name
@@ -61,7 +61,7 @@ def edit():
                 print("                You've selected: Edit User First Name")
                 print("")
                 print(f"                What would you like '{staff_data.first_name}' to be changed to?")
-                new_first_name = str(input("                        "))
+                new_first_name = str(input("                    > : "))
                 check = 0
                 print(f'''
                 Is '{new_first_name}' correct?
@@ -70,7 +70,7 @@ def edit():
 
                     2 : NO
                 ''')
-                check = int(input("                        "))
+                check = int(input("                    > : "))
                 while check != 3:
                     if check == 1:
                         staff_data.first_name = new_first_name
@@ -88,7 +88,7 @@ def edit():
                 print("                You've selected: Edit User Last Name")
                 print("")
                 print(f'                What would you like "{staff_data.last_name}" to be changed to?')
-                new_last_name = str(input("                        "))
+                new_last_name = str(input("                    > : "))
                 check = 0
                 print(f'''
                 Is '{new_last_name}' correct?
@@ -97,7 +97,7 @@ def edit():
 
                     2 : NO
                         ''')
-                check = int(input("                        "))
+                check = int(input("                    > : "))
                 while check != 3:
                     if check == 1:
                         staff_data.last_name = new_last_name
@@ -116,7 +116,7 @@ def edit():
                 print(f'                What would you like "{staff_data.position_id}" to be changed to?')
                 print("                     A L L  P O S I T I O N S")
                 print(session.query(Position).all())
-                new_position = int(input("                        "))
+                new_position = int(input("                    > : "))
                 check = 0
                 print(f'''
                 Is '{new_position}' correct?
@@ -125,7 +125,7 @@ def edit():
 
                     2 : NO
                 ''')
-                check = int(input("                        "))
+                check = int(input("                    > : "))
                 while check != 3:
                     if check == 1:
                         staff_data.position_id = new_position
@@ -147,7 +147,7 @@ def delete():
     print(session.query(Staff).all())
     print("                Please enter the ID of the staff you want to delete.")
     print("                NOTE: THIS CANNOT BE UNDONE.")
-    staff_id = int(input("                        "))
+    staff_id = int(input("                    > : "))
     staff_data = session.query(Staff).get(staff_id)
     if staff_data != None: 
         print(staff_data)
@@ -161,7 +161,7 @@ def delete():
                     2 : NO
                 ''')
  
-        delete_choice = int(input("                        "))
+        delete_choice = int(input("                    > : "))
         while delete_choice !=3:
             if delete_choice == 1:
                 session.delete(staff_data)

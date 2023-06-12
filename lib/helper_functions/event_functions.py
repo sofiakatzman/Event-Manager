@@ -5,8 +5,10 @@ from db.models import (Event, Schedule, Position, Staff)
 engine = create_engine("sqlite:///db/event_manager.db")
 session = Session(engine, future=True)
 
+ 
 # create an event
 def add_event():
+    print("")
     print("                  Let's crate an event...")
     print("                  Please enter an Event Type:")
     new_name = str(input("                        "))
@@ -21,10 +23,14 @@ def add_event():
 
 # create a staff schedule 
 def create_schedule():
+    print("")
     print("                  Let's create a schedule...")
     # print all events 
     print("                  Please enter the ID of the event you would like to create a schedule for:")
     all_active_events = session.query(Event).filter(Event.is_active == True).all()
+    print("")
+    print("                      A L L  E V E N T S")
+    print("                --------------------------------------")
     print(all_active_events)
     event_selection = int(input("                        "))
 
@@ -143,7 +149,8 @@ def closeout():
 
 # view all event history 
 def view():
+    print("")
     print("                      E V E N T  H I S T O R Y")  
-    print("                  --------------------------------------")
+    print("                --------------------------------------")
     active = session.query(Event).all()
     print(active)
