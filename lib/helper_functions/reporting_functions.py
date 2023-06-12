@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from db.models import Event, Position, Staff
+from db.models import Event, Position, Staff, Schedule
 from pyfiglet import Figlet
 
 engine = create_engine("sqlite:///db/event_manager.db")
@@ -18,6 +18,7 @@ def view_open_events():
             print(f"                   Event ID: {event.id}")
             print(f"                   Event Type: {event.type}")
             print(f"                   Event Date: {event.date}")
+            print("")
 
     else:
         print("              ----------------------------------------")
@@ -36,20 +37,65 @@ def view_closed_events():
             print(f"                   Event ID: {event.id}")
             print(f"                   Event Type: {event.type}")
             print(f"                   Event Date: {event.date}")
+            print("")
     else:
         print("              ----------------------------------------")
         print("")
-        print("No closed events found.")
+        print("                  No closed events found.")
+
+# view event schedules
+def view_event_schedules():
+    print("")
+    print("")
+    print("                     E V E N T   S C H E D U L E S")
+    schedules = session.query(Schedule).all()
+    if schedules:
+        event_ids = [schedule.event_id for schedule in schedules]
+        events = session.query(Event).filter(Event.id.in_(event_ids)).all()
+        for event in events:
+            print("               ----------------------------------------")
+            print("")
+            print(f"                  Event ID: {event.id}")
+            print(f"                  Event Name: {event.type}")
+            print(f"                  Event Description: {event.description}")
+            print(f"                  Event Date: {event.date}")
+            print("")
+
+            
+            positions = session.query(Position).all()
+            print("")
+            print("                     E V E N T   S T A F F ")
+            print("               ----------------------------------------")
+            for position in positions:
+                print(f"                  Position ID: {position.id}")
+                print(f"                  Position Name: {position.name}")
+                
+                position_schedules = [schedule for schedule in schedules if schedule.event_id == event.id and schedule.position_id == position.id]
+                if position_schedules:
+                    for schedule in position_schedules:
+                        staff = session.query(Staff).filter(Staff.id == schedule.staff_id).first()
+                        if staff:
+                            print(f"                  Staff Name : {staff.first_name} {staff.last_name}")
+                else:
+                    print("                  No staff scheduled for this position.") 
+                print("") 
+            print("") 
+    else:
+        print("              ----------------------------------------")
+        print("")
+        print("                  No event schedules found.")
 
 # view staff by position
 def staff_by_position():
+    print("")
     print("                      S T A F F   B Y   P O S I T I O N")
     positions = session.query(Position).all()
     for position in positions:
         print("")
-        print(f"                                            {position.name.upper()}")
+        print(f"                                        {position.name.upper()}")
         # print(Figlet(font = "digital").renderText(f'POSITION : {position.name.upper()}'))
-        print("                 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
+        print("")
+        print("              -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
         # print(f"Position: {position.name}")
         staff = session.query(Staff).filter_by(position_id=position.id).all()
         if staff:
