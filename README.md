@@ -19,28 +19,28 @@ This CLI app utilizes an SQLAlchemy database to store records, making it easier 
 
 ## Command Line Interface Structure & Functionality:
 User Module (Main menu choice = 1): `user_functions.py`
-1. VIEW STAFF USERS - `view()`: Displays all staff members' first and last names, staff ID number, and position ID.
-2. ADD A STAFF MEMBER - `add()`: Adds a user to the database. Requires the user's first and last name, along with their position designation.
-3. EDIT A STAFF MEMBER - `edit()`: Allows you to select a staff member based on their staff ID and choose which attributes to edit, such as their first name, last name, or position ID.
-4. DELETE A STAFF MEMBER - `delete()`: Allows you to select a staff member based on their staff ID and permanently delete them from the database.
+  - VIEW STAFF USERS - `view()`: Displays all staff members' first and last names, staff ID number, and position ID.
+  - ADD A STAFF MEMBER - `add()`: Adds a user to the database. Requires the user's first and last name, along with their position designation.
+  - EDIT A STAFF MEMBER - `edit()`: Allows you to select a staff member based on their staff ID and choose which attributes to edit, such as their first name, last name, or position ID.
+  - DELETE A STAFF MEMBER - `delete()`: Allows you to select a staff member based on their staff ID and permanently delete them from the database.
 
 Position Module (Main menu choice = 2): `position_functions.py`
-1. VIEW POSITIONS - `view()`: Displays all position information from the database, including each position's name and ID number.
-2. ADD A POSITION - `add()`: Adds a position using a name, with the position ID number automatically generated.
-3. EDIT POSITION NAME - `edit()`: Changes a position's name based on its ID number.
-4. DELETE A POSITION - `delete()`: Deletes a position based on its ID number.
+  - VIEW POSITIONS - `view()`: Displays all position information from the database, including each position's name and ID number.
+  - ADD A POSITION - `add()`: Adds a position using a name, with the position ID number automatically generated.
+  - EDIT POSITION NAME - `edit()`: Changes a position's name based on its ID number.
+  - DELETE A POSITION - `delete()`: Deletes a position based on its ID number.
 
 Event Module (Main menu choice = 3): `event_functions.py`
-1. CREATE AN EVENT - `add()`: Adds an event based on the event type, event description, and date. All events are automatically set to active and must be closed out to become inactive.
-2. CREATE AN EVENT STAFF SCHEDULE - `create_schedule()`: Creates an event staff schedule for any active event. You can specify the number of staff positions needed, their position-specific arrival times, and select staff members based on their current position attributes.
-3. CLOSE OUT AN EVENT - `closeout()`: Closes out an event with an existing schedule. Closing out an event marks it as inactive.
-4. VIEW EVENT HISTORY - `view()`: Displays the event history, including all events from the database regardless of their status.
+  - CREATE AN EVENT - `add()`: Adds an event based on the event type, event description, and date. All events are automatically set to active and must be closed out to become inactive.
+  - CREATE AN EVENT STAFF SCHEDULE - `create_schedule()`: Creates an event staff schedule for any active event. You can specify the number of staff positions needed, their position-specific arrival times, and select staff members based on their current position attributes.
+  - CLOSE OUT AN EVENT - `closeout()`: Closes out an event with an existing schedule. Closing out an event marks it as inactive.
+  - VIEW EVENT HISTORY - `view()`: Displays the event history, including all events from the database regardless of their status.
 
 Reporting Module (Main menu choice = 5): `reporting_functions.py`
-1. VIEW OPEN EVENTS - `view_open_events()`: Shows a list of all active events.
-2. VIEW CLOSED EVENTS - `view_closed_events()`: Displays a list of all closed events.
-3. VIEW EVENT STAFF SCHEDULES - `view_event_schedule()`: Views the event staff schedule based on the inputted event ID.
-4. VIEW STAFF BY POSITION - `staff_by_position()`: Provides a staff list categorized by position.
+  - VIEW OPEN EVENTS - `view_open_events()`: Shows a list of all active events.
+  - VIEW CLOSED EVENTS - `view_closed_events()`: Displays a list of all closed events.
+  - VIEW EVENT STAFF SCHEDULES - `view_event_schedule()`: Views the event staff schedule based on the inputted event ID.
+  - VIEW STAFF BY POSITION - `staff_by_position()`: Provides a staff list categorized by position.
 
 ## Installation
 To install and run Event Manager, ensure that you have Python 3 and pip installed on your system.
