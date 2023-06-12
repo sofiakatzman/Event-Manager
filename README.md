@@ -9,7 +9,7 @@ This CLI app utilizes an SQLAlchemy database to store records, making it easier 
 - All program files, except for the README.md and Pipfile, are located inside the `/lib` folder.
 - The `/lib/db` directory contains the database seed `seed.py` and the database structure `models.py`.
 - The command line program itself is in `lib/cli.py`, and it can be executed by following the installation steps provided below.
-- The five main functional components of Event Manager are stored in the `/lib/helper_functions/...` directory:
+- The four main functional components of Event Manager are stored in the `/lib/helper_functions/...` directory:
   - `/staff_functions.py`: Contains functions related to the staff module (selection 1 on the main menu). It allows event managers to perform basic CRUD actions on staff, such as adding, deleting, and editing staff records.
   - `/position_functions.py`: Contains functions related to the position module (selection 2 on the main menu). It provides CRUD actions for managing positions.
   - `/event_functions.py`: Contains functions related to the events module (selection 3 on the main menu). In addition to CRUD actions, this module offers advanced options such as creating event schedules and closing out events.
