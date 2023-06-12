@@ -1,7 +1,7 @@
 # Event Manager
 
 ## Description
-Event Manager is a user-friendly command-line interface that allows Event Managers to efficiently manage their staff, events, and event schedules. The inspiration behind Event Manager comes from my own experience as an event director, where I had to store records of staff data and event history. Although Event Manager is not yet complete, it will include many more features in the future.
+Event Manager is a user-friendly command-line interface that allows Event Managers to efficiently manage their staff, events, and event schedules. The inspiration behind Event Manager comes from my own experience as an event director, where I had to store records of staff data and event history.
 
 This CLI app utilizes an SQLAlchemy database to store records, making it easier for users to view, edit, and delete staff, event, and job position data. In the future, Event Manager will incorporate event tip-out based on staff position tip-out percentage and introduce a new set of reporting capabilities.
 
@@ -53,7 +53,9 @@ To install and run Event Manager, ensure that you have Python 3 and pip installe
 6. Run `python cli.py` to start using Event Manager.
 
 ## Usage Visuals
-TBD
+![main menu of Event Manager](https://imgur.com/fYtvHDn)
+![sample user path](https://imgur.com/nPl38De)
+![goodbye exit screen](https://imgur.com/p4dfPBC)
 
 ## Contributing
 Pull requests for review are welcome. However, major changes are not allowed.
