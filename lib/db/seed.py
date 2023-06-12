@@ -51,6 +51,7 @@ event_types = {"Art Gallery Opening" : "Art Gallery Opening for P&W" ,
                 "Music Show" : "Music Event at The Edge",
                 "Talent Showcase" : "Talent Showcase at Sony Hall", 
                 "Music Festival" : "CircoLoco Music Festival"}
+
 events = []
 start_date = date(2022, 1, 1)
 end_date = date(2023, 6, 1)
@@ -62,17 +63,15 @@ for event_type, event_description in event_types.items():
     )
     events.append(event)
 
-# Generate schedule data
-# no schedule data yet
-
-# def __init__(self, event_id, event_type, staff_id, position_id, arrival_time=0000):
-schedules = []
-schedule1 = Schedule(id=1, event_type = "Art Gallery Opening", staff_id = 1, position_id = 5, arrival_time = "12:00")
-
-# no schedule data yet
-
+# generate schedyke data
+schedule1 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 1, position_id = 5, arrival_time = "12:00")
+schedule2 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 2, position_id = 3, arrival_time = "12:00")
+schedule3 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 6, position_id = 3, arrival_time = "12:00")
+schedule4 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 15, position_id = 2, arrival_time = "12:00")
+schedule5 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 23, position_id = 5, arrival_time = "12:00")
 print("Seeding data...")
 # Add all data to the session
+schedules = [schedule1, schedule2, schedule3, schedule4, schedule5]
 all_objects = staff + positions + events + schedules
 session.add_all(all_objects)
 session.commit()
