@@ -63,7 +63,7 @@ for event_type, event_description in event_types.items():
     )
     events.append(event)
 
-# generate schedyke data
+# generate schedule data
 schedule1 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 1, position_id = 5, arrival_time = "12:00")
 schedule2 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 2, position_id = 3, arrival_time = "12:00")
 schedule3 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 6, position_id = 3, arrival_time = "12:00")
