@@ -46,7 +46,6 @@ def view_closed_events():
 # view event schedules
 def view_event_schedules():
     print("")
-    print("")
     print("                     E V E N T   S C H E D U L E S")
     schedules = session.query(Schedule).all()
     if schedules:
@@ -55,36 +54,35 @@ def view_event_schedules():
         for event in events:
             print("               ----------------------------------------")
             print("")
-            print(f"                  Event ID: {event.id}")
-            print(f"                  Event Name: {event.type}")
-            print(f"                  Event Description: {event.description}")
-            print(f"                  Event Date: {event.date}")
+            print(f"                   Event ID: {event.id}")
+            print(f"                   Event Name: {event.type}")
+            print(f"                   Event Description: {event.description}")
+            print(f"                   Event Date: {event.date}")
             print("")
+            print("                   Positions and Staff:")
 
-            
             positions = session.query(Position).all()
-            print("")
-            print("                     E V E N T   S T A F F ")
-            print("               ----------------------------------------")
             for position in positions:
-                print(f"                  Position ID: {position.id}")
-                print(f"                  Position Name: {position.name}")
-                
                 position_schedules = [schedule for schedule in schedules if schedule.event_id == event.id and schedule.position_id == position.id]
                 if position_schedules:
-                    for schedule in position_schedules:
-                        staff = session.query(Staff).filter(Staff.id == schedule.staff_id).first()
-                        if staff:
-                            print(f"                  Staff Name : {staff.first_name} {staff.last_name}")
-                else:
-                    print("                  No staff scheduled for this position.") 
-                print("") 
-            print("") 
+                    print("")
+                    print(f"                      Position ID: {position.id}")
+                    print(f"                      Position Name: {position.name}")
+
+                    staff_ids = [schedule.staff_id for schedule in position_schedules]
+                    staff_records = session.query(Staff).filter(Staff.id.in_(staff_ids)).all()
+                    if staff_records:
+                        for staff in staff_records:
+                            print(f"                      - {staff.first_name} {staff.last_name}")
+                    else:
+                        print("                      No staff scheduled for this position.")
+
+            print("")  # Add empty line between events
+
     else:
         print("              ----------------------------------------")
         print("")
         print("                  No event schedules found.")
-
 # view staff by position
 def staff_by_position():
     print("")
