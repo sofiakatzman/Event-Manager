@@ -72,6 +72,5 @@ schedule5 = Schedule(event_id=1, event_type = "Art Gallery Opening", staff_id = 
 print("Seeding data...")
 # Add all data to the session
 schedules = [schedule1, schedule2, schedule3, schedule4, schedule5]
-all_objects = staff + positions + events + schedules
-session.add_all(all_objects)
+session.add_all(staff + positions + events + schedules)
 session.commit()
