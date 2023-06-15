@@ -224,10 +224,16 @@ def main():
                     reroute()
                 
 
-    if choice == 5:
-        return print(Figlet(font = "speed").renderText('''         bye'''))
+    else:
+        choice = 5
+
+def goodbye():
+    return print(Figlet(font = "speed").renderText('''         bye'''))
+
+
 
 if __name__ == "__main__":
     greeting()
     main()
+    goodbye()
 
