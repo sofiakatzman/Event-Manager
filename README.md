@@ -36,7 +36,7 @@ Event Module (Main menu choice = 3): `event_functions.py`
   - CLOSE OUT AN EVENT - `closeout()`: Closes out an event with an existing schedule. Closing out an event marks it as inactive.
   - VIEW EVENT HISTORY - `view()`: Displays the event history, including all events from the database regardless of their status.
 
-Reporting Module (Main menu choice = 5): `reporting_functions.py`
+Reporting Module (Main menu choice = 4): `reporting_functions.py`
   - VIEW OPEN EVENTS - `view_open_events()`: Shows a list of all active events.
   - VIEW CLOSED EVENTS - `view_closed_events()`: Displays a list of all closed events.
   - VIEW EVENT STAFF SCHEDULES - `view_event_schedule()`: Views the event staff schedule based on the inputted event ID.
