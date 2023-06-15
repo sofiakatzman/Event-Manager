@@ -228,7 +228,9 @@ def main():
         choice = 5
 
 def goodbye():
-    return print(Figlet(font = "speed").renderText('''         bye'''))
+    print("")
+    return print(Figlet(font = "speed").renderText('''         bye''')+ "\n                thank you for stopping by, i hope you enjoyed your stay \n")
+
 
 
 
